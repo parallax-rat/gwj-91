@@ -13,8 +13,6 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	health_component.max_health = parameters.base_health
-	health_component.current_health = health_component.max_health
-	print(player)
 
 
 func _physics_process(delta: float) -> void:
@@ -32,6 +30,8 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(amount: int) -> void:
 	health_component.take_damage(amount)
+	if health_component.current_health <= 0:
+		health_component.is_dead()
 	print(name," damaged. ",health_component.current_health, " remaining.")
 
 
@@ -41,6 +41,9 @@ func _on_health_component_died() -> void:
 		var new_dna = dna_drop.instantiate()
 		get_tree().root.add_child(new_dna)
 		new_dna.global_position = get_random_direction() * 10
+	CLog.o(name," died.")
+	CLog.o("Dropped ",dna_drop_quantity," DNA")
+	queue_free()
 
 
 func get_random_direction() -> Vector2:

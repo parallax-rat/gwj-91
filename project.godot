@@ -37,6 +37,7 @@ enabled=PackedStringArray("res://addons/Gedis/plugin.cfg", "res://addons/GedisQu
 player=""
 stage_camera=""
 tick_time_label=""
+debug_ui=""
 
 [gui]
 

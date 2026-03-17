@@ -12,8 +12,5 @@ func _on_dna_siphon_body_entered(body: Node2D) -> void:
 		body.set_leader(self)
 
 
-
-
-
 func increase_dna(amount:float) -> void:
 	dna.increase(amount)

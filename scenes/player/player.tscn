@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4cyevdfdvf83" path="res://addons/icon_widget/local_icons/carbon/circle-filled.png" id="2_gmlin"]
 [ext_resource type="StatPool" uid="uid://b8v86lv7uuyj8" path="res://scenes/player/dna_stat_pool.tres" id="3_0owmy"]
 [ext_resource type="Script" uid="uid://cjq0evejvuym0" path="res://addons/indie_game_components/components/vitals/HealthComponent.gd" id="3_gmlin"]
-[ext_resource type="PackedScene" uid="uid://cb7pty3hi22o6" path="res://scenes/player/attack_component.tscn" id="6_qek5x"]
+[ext_resource type="PackedScene" uid="uid://cb7pty3hi22o6" path="res://scenes/player/attacks/attack_component.tscn" id="6_qek5x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
 radius = 24.0

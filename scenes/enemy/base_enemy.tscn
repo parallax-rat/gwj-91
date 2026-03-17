@@ -41,6 +41,8 @@ debug_color = Color(0.9647059, 0, 0.16862746, 0.41960785)
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1432330779]
 script = ExtResource("3_eb5uv")
+max_health = 5
+invincibility_time = 0.0
 metadata/_custom_type_script = "uid://cjq0evejvuym0"
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=1499775764]

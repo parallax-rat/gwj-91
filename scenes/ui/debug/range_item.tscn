@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://bl4xvpo6j6hej"]
 
+[ext_resource type="Script" uid="uid://deyimo4spgveg" path="res://scenes/ui/debug/range_item.gd" id="1_86pnx"]
+
 [node name="RangeItem" type="VBoxContainer" unique_id=672909694]
+script = ExtResource("1_86pnx")
+metadata/enemy = NodePath("")
 
 [node name="EnemyLabels" type="HBoxContainer" parent="." unique_id=1768903051]
 layout_mode = 2
