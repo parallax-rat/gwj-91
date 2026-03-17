@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bk80fxrac0p3i"]
+
+[ext_resource type="PackedScene" uid="uid://sikc02ddepyt" path="res://addons/maaacks_game_template/base/nodes/opening/opening.tscn" id="1_ke3tw"]
+[ext_resource type="Texture2D" uid="uid://daput5j66exgu" path="res://assets/godot_engine_logo/logo_vertical_color_dark.png" id="2_yhkvs"]
+[ext_resource type="Script" uid="uid://dwy3leln0nnef" path="res://addons/icon_widget/icon_widget.gd" id="3_yhkvs"]
+
+[node name="Opening" unique_id=2089376575 instance=ExtResource("1_ke3tw")]
+next_scene_path = "uid://dhr7kwfkmlq7o"
+images = Array[Texture2D]([ExtResource("2_yhkvs")])
+
+[node name="ImagesContainer" parent="." index="0" unique_id=969970400]
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="IconWidget" type="Control" parent="." index="1" unique_id=1961420015]
+custom_minimum_size = Vector2(24, 24)
+anchors_preset = 0
+offset_right = 24.0
+offset_bottom = 24.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("3_yhkvs")
+metadata/_custom_type_script = "uid://dwy3leln0nnef"

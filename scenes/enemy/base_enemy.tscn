@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://001l0b5a1coo"]
+
+[ext_resource type="Script" uid="uid://sh5cpw3p0vye" path="res://scenes/enemy/base_enemy.gd" id="1_23iyx"]
+[ext_resource type="Texture2D" uid="uid://b4cyevdfdvf83" path="res://addons/icon_widget/local_icons/carbon/circle-filled.png" id="1_jf5t1"]
+[ext_resource type="Script" uid="uid://b68cg8nxapo32" path="res://resources/abilities/ability.gd" id="2_se4xw"]
+[ext_resource type="Script" uid="uid://cjq0evejvuym0" path="res://addons/indie_game_components/components/vitals/HealthComponent.gd" id="3_eb5uv"]
+[ext_resource type="Script" uid="uid://ww35o3ubyq0s" path="res://resources/diseases/disease.gd" id="3_x8f0n"]
+[ext_resource type="Script" uid="uid://3le7oaejwog" path="res://scenes/enemy/enemy_parameters.gd" id="4_316ce"]
+[ext_resource type="PackedScene" uid="uid://clxqc1vdcnnui" path="res://scenes/dna/dna.tscn" id="6_x8f0n"]
+
+[sub_resource type="Resource" id="Resource_ehali"]
+script = ExtResource("4_316ce")
+sprite = ExtResource("1_jf5t1")
+base_color = Color(0.77254903, 0, 0, 1)
+spotlight_color = Color(0.95946056, 0.9238771, 0.71810853, 1)
+dna_drop_range = Vector2i(0, 3)
+metadata/_custom_type_script = "uid://3le7oaejwog"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jf5t1"]
+radius = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x8f0n"]
+radius = 42.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=2119407830]
+modulate = Color(0.9167757, 0.114541434, 0, 1)
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("1_23iyx")
+parameters = SubResource("Resource_ehali")
+dna_drop = ExtResource("6_x8f0n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1494801482]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_jf5t1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1042461258]
+visible = false
+shape = SubResource("CircleShape2D_jf5t1")
+debug_color = Color(0.9647059, 0, 0.16862746, 0.41960785)
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1432330779]
+script = ExtResource("3_eb5uv")
+metadata/_custom_type_script = "uid://cjq0evejvuym0"
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=1499775764]
+collision_layer = 0
+input_pickable = false
+
+[node name="DamageShape" type="CollisionShape2D" parent="DamageArea" unique_id=2028847096]
+visible = false
+shape = SubResource("CircleShape2D_x8f0n")
+debug_color = Color(0.9999998, 0.0094214985, 0.06508232, 0.41960785)
+
+[node name="DamageDelay" type="Timer" parent="." unique_id=371397459]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="timeout" from="DamageDelay" to="." method="_on_damage_delay_timeout"]

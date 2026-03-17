@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cb7pty3hi22o6"]
+
+[ext_resource type="Script" uid="uid://bba2hijp37why" path="res://scenes/player/attack_component.gd" id="1_vwk26"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qek5x"]
+radius = 164.0
+
+[node name="AttackComponent" type="Node2D" unique_id=1963452436]
+script = ExtResource("1_vwk26")
+
+[node name="AttackRange" type="Area2D" parent="." unique_id=2094870241]
+collision_layer = 0
+collision_mask = 4
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=1782812022]
+shape = SubResource("CircleShape2D_qek5x")
+debug_color = Color(0.047058824, 0, 0.07058824, 0.41960785)
+
+[node name="Cooldown" type="Timer" parent="." unique_id=41073397]
+one_shot = true
+
+[node name="Control" type="Control" parent="." unique_id=1323643361]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]

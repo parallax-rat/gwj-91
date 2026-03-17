@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://b2ihdqqi3bfvl"]
+
+[ext_resource type="Script" uid="uid://nhuc2b5m2pf2" path="res://scenes/ui/gameplay_ui.gd" id="1_8873e"]
+[ext_resource type="Script" uid="uid://cvf3xpnaeagsl" path="res://addons/health_bar_x/runtime/health_bar_x_control.gd" id="1_xarm8"]
+[ext_resource type="Resource" uid="uid://dyhw2f47fg62p" path="res://scenes/player/player_health_bar_style.tres" id="2_gwdo8"]
+[ext_resource type="Script" uid="uid://be5ij7yubf56i" path="res://addons/health_bar_x/runtime/health_bar_x_style.gd" id="2_soafi"]
+[ext_resource type="Texture2D" uid="uid://dsup7ug6wi234" path="res://addons/icon_widget/local_icons/material-icon-theme/crystal.png" id="4_gwdo8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8873e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ny6e"]
+
+[sub_resource type="Resource" id="Resource_8873e"]
+script = ExtResource("2_soafi")
+fill_color = Color(0.81960785, 0.29411766, 0.88235295, 1)
+color_green = Color(0.19607843, 1, 0.19607843, 1)
+label_enabled = true
+outline_size = 2
+icon_enabled = true
+icon_texture = ExtResource("4_gwdo8")
+icon_forced_size = Vector2(64, 64)
+icon_tint = Color(0.81960785, 0.29411766, 0.88235295, 1)
+metadata/_custom_type_script = "uid://be5ij7yubf56i"
+
+[node name="GameplayUI" type="Control" unique_id=484771056]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8873e")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1238905561]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=705802845]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 300
+alignment = 1
+
+[node name="HPContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=200190054]
+custom_minimum_size = Vector2(640, 42)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8873e")
+
+[node name="PlayerHPBar" type="Control" parent="MarginContainer/HBoxContainer/HPContainer" unique_id=40454769]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 42)
+layout_mode = 2
+size_flags_vertical = 5
+script = ExtResource("1_xarm8")
+style = ExtResource("2_gwdo8")
+metadata/_custom_type_script = "uid://cvf3xpnaeagsl"
+
+[node name="DNAContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=1937614081]
+custom_minimum_size = Vector2(640, 42)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3ny6e")
+
+[node name="PlayerDNABar" type="Control" parent="MarginContainer/HBoxContainer/DNAContainer" unique_id=1828278777]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 42)
+layout_mode = 2
+size_flags_vertical = 5
+script = ExtResource("1_xarm8")
+style = SubResource("Resource_8873e")
+value = 0.0
+metadata/_custom_type_script = "uid://cvf3xpnaeagsl"

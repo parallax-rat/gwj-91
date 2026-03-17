@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://kojrcu6sef68"]
+
+[ext_resource type="PackedScene" uid="uid://clxqc1vdcnnui" path="res://scenes/dna/dna.tscn" id="1_i7qv5"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="1_lxudy"]
+[ext_resource type="PackedScene" uid="uid://bfi0q51set0hr" path="res://scenes/player/player.tscn" id="2_ggu3y"]
+[ext_resource type="PackedScene" uid="uid://d0c5fl58ym4t0" path="res://scenes/ui/debug_ui.tscn" id="2_hovcq"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_qb51w"]
+[ext_resource type="PackedScene" uid="uid://b2ihdqqi3bfvl" path="res://scenes/ui/gameplay_ui.tscn" id="3_ggu3y"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_hovcq"]
+[ext_resource type="PackedScene" uid="uid://001l0b5a1coo" path="res://scenes/enemy/base_enemy.tscn" id="7_lxudy"]
+[ext_resource type="Script" uid="uid://dha0jx3poh0ft" path="res://scenes/game_scene/levels/spawn_component.gd" id="8_qb51w"]
+
+[sub_resource type="Resource" id="Resource_0e2qu"]
+script = ExtResource("2_qb51w")
+
+[node name="Stage" type="Node2D" unique_id=1128801347]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1985399792]
+layer = 2
+
+[node name="GameplayUI" parent="CanvasLayer" unique_id=484771056 instance=ExtResource("3_ggu3y")]
+
+[node name="DebugUI" parent="CanvasLayer" unique_id=1141851296 instance=ExtResource("2_hovcq")]
+
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1013246708 node_paths=PackedStringArray("follow_target") groups=["stage_camera"]]
+top_level = true
+position = Vector2(320, 224)
+script = ExtResource("1_lxudy")
+follow_mode = 5
+follow_target = NodePath("../Player")
+tween_resource = SubResource("Resource_0e2qu")
+follow_damping = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1268559613]
+physics_interpolation_mode = 1
+top_level = true
+position = Vector2(320, 224)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=298309258]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("7_hovcq")
+
+[node name="Player" parent="." unique_id=1910550159 instance=ExtResource("2_ggu3y")]
+unique_name_in_owner = true
+position = Vector2(320, 224)
+
+[node name="DNA" parent="." unique_id=143577435 instance=ExtResource("1_i7qv5")]
+position = Vector2(512, 320)
+
+[node name="DNA2" parent="." unique_id=1440684577 instance=ExtResource("1_i7qv5")]
+position = Vector2(544, 640)
+
+[node name="DNA3" parent="." unique_id=2085412356 instance=ExtResource("1_i7qv5")]
+position = Vector2(704, 64)
+
+[node name="DNA4" parent="." unique_id=192161826 instance=ExtResource("1_i7qv5")]
+position = Vector2(256, 416)
+
+[node name="DNA5" parent="." unique_id=1545900957 instance=ExtResource("1_i7qv5")]
+position = Vector2(192, 32)
+
+[node name="DNA6" parent="." unique_id=2034211507 instance=ExtResource("1_i7qv5")]
+position = Vector2(64, 288)
+
+[node name="DNA7" parent="." unique_id=1265067096 instance=ExtResource("1_i7qv5")]
+position = Vector2(736, 128)
+
+[node name="DNA8" parent="." unique_id=443178510 instance=ExtResource("1_i7qv5")]
+position = Vector2(704, 96)
+
+[node name="DNA9" parent="." unique_id=1570123156 instance=ExtResource("1_i7qv5")]
+position = Vector2(736, 352)
+
+[node name="DNA10" parent="." unique_id=787472482 instance=ExtResource("1_i7qv5")]
+position = Vector2(544, 352)
+
+[node name="DNA11" parent="." unique_id=275432078 instance=ExtResource("1_i7qv5")]
+position = Vector2(96, 640)
+
+[node name="SpawnComponent" type="Node2D" parent="." unique_id=737466401]
+script = ExtResource("8_qb51w")
+scene_to_spawn = ExtResource("7_lxudy")
+number_to_spawn = 3

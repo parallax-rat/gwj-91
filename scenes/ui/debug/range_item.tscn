@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bl4xvpo6j6hej"]
+
+[node name="RangeItem" type="VBoxContainer" unique_id=672909694]
+
+[node name="EnemyLabels" type="HBoxContainer" parent="." unique_id=1768903051]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EnemyLabels" unique_id=409472170]
+layout_mode = 2
+text = "0"
+
+[node name="VSeparator" type="VSeparator" parent="EnemyLabels" unique_id=1455062786]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ClosestEnemyLabel" type="Label" parent="EnemyLabels" unique_id=797341290]
+layout_mode = 2
+text = "Enemy"
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1529983162]
+layout_mode = 2

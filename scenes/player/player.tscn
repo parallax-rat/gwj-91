@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bfi0q51set0hr"]
+
+[ext_resource type="Script" uid="uid://dqus7ddco8loo" path="res://addons/indie_game_components/components/movement/EightDirMoverComponent.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://cb27mxocmn07i" path="res://scenes/player/player.gd" id="1_lvxji"]
+[ext_resource type="StatPool" uid="uid://sqms50b2qn0a" path="res://scenes/player/health_stat_pool.tres" id="2_75vfm"]
+[ext_resource type="Texture2D" uid="uid://b4cyevdfdvf83" path="res://addons/icon_widget/local_icons/carbon/circle-filled.png" id="2_gmlin"]
+[ext_resource type="StatPool" uid="uid://b8v86lv7uuyj8" path="res://scenes/player/dna_stat_pool.tres" id="3_0owmy"]
+[ext_resource type="Script" uid="uid://cjq0evejvuym0" path="res://addons/indie_game_components/components/vitals/HealthComponent.gd" id="3_gmlin"]
+[ext_resource type="PackedScene" uid="uid://cb7pty3hi22o6" path="res://scenes/player/attack_component.tscn" id="6_qek5x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lvxji"]
+radius = 100.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1910550159 groups=["player"]]
+collision_mask = 72
+motion_mode = 1
+script = ExtResource("1_lvxji")
+health = ExtResource("2_75vfm")
+dna = ExtResource("3_0owmy")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=2100401521]
+script = ExtResource("1_dovo2")
+speed = 350.0
+metadata/_custom_type_script = "uid://dqus7ddco8loo"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=152969569]
+script = ExtResource("3_gmlin")
+metadata/_custom_type_script = "uid://cjq0evejvuym0"
+
+[node name="AttackComponent" parent="." unique_id=1963452436 instance=ExtResource("6_qek5x")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=203274411]
+modulate = Color(0.19607843, 1, 0.19607843, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_gmlin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=287641513]
+shape = SubResource("CircleShape2D_gmlin")
+debug_color = Color(0, 0.8328853, 0, 0.41960785)
+
+[node name="DNASiphon" type="Area2D" parent="." unique_id=76899366]
+collision_layer = 128
+collision_mask = 2
+collision_priority = 3.0
+gravity_point = true
+gravity_point_unit_distance = 100.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DNASiphon" unique_id=831533328]
+shape = SubResource("CircleShape2D_lvxji")
+debug_color = Color(1, 0.31729144, 0.90568215, 0.16470589)
+
+[connection signal="body_entered" from="DNASiphon" to="." method="_on_dna_siphon_body_entered"]
