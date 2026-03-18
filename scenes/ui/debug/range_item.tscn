@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://deyimo4spgveg" path="res://scenes/ui/debug/range_item.gd" id="1_86pnx"]
 
-[node name="RangeItem" type="VBoxContainer" unique_id=672909694]
+[node name="RangeItem" type="VBoxContainer" unique_id=672909694 node_paths=PackedStringArray("index_label", "closest_enemy_label")]
 script = ExtResource("1_86pnx")
+index_label = NodePath("EnemyLabels/IndexLabel")
+closest_enemy_label = NodePath("EnemyLabels/ClosestEnemyLabel")
 metadata/enemy = NodePath("")
 
 [node name="EnemyLabels" type="HBoxContainer" parent="." unique_id=1768903051]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EnemyLabels" unique_id=409472170]
+[node name="IndexLabel" type="Label" parent="EnemyLabels" unique_id=409472170]
 layout_mode = 2
 text = "0"
 

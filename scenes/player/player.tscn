@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://dqus7ddco8loo" path="res://addons/indie_game_components/components/movement/EightDirMoverComponent.gd" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://cb27mxocmn07i" path="res://scenes/player/player.gd" id="1_lvxji"]
 [ext_resource type="StatPool" uid="uid://sqms50b2qn0a" path="res://scenes/player/health_stat_pool.tres" id="2_75vfm"]
-[ext_resource type="Texture2D" uid="uid://b4cyevdfdvf83" path="res://addons/icon_widget/local_icons/carbon/circle-filled.png" id="2_gmlin"]
 [ext_resource type="StatPool" uid="uid://b8v86lv7uuyj8" path="res://scenes/player/dna_stat_pool.tres" id="3_0owmy"]
 [ext_resource type="Script" uid="uid://cjq0evejvuym0" path="res://addons/indie_game_components/components/vitals/HealthComponent.gd" id="3_gmlin"]
 [ext_resource type="PackedScene" uid="uid://cb7pty3hi22o6" path="res://scenes/player/attacks/attack_component.tscn" id="6_qek5x"]
+[ext_resource type="Texture2D" uid="uid://bsh5v3obra4wi" path="res://scenes/enemy/virus/Virus1.png" id="7_0owmy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
 radius = 24.0
@@ -33,9 +33,8 @@ metadata/_custom_type_script = "uid://cjq0evejvuym0"
 [node name="AttackComponent" parent="." unique_id=1963452436 instance=ExtResource("6_qek5x")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=203274411]
-modulate = Color(0.19607843, 1, 0.19607843, 1)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_gmlin")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_0owmy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=287641513]
 shape = SubResource("CircleShape2D_gmlin")

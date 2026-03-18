@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cvf3xpnaeagsl" path="res://addons/health_bar_x/runtime/health_bar_x_control.gd" id="1_xarm8"]
 [ext_resource type="Resource" uid="uid://dyhw2f47fg62p" path="res://scenes/player/player_health_bar_style.tres" id="2_gwdo8"]
 [ext_resource type="Script" uid="uid://be5ij7yubf56i" path="res://addons/health_bar_x/runtime/health_bar_x_style.gd" id="2_soafi"]
-[ext_resource type="Texture2D" uid="uid://dsup7ug6wi234" path="res://addons/icon_widget/local_icons/material-icon-theme/crystal.png" id="4_gwdo8"]
+[ext_resource type="Texture2D" uid="uid://cc2mcxp2ivbob" path="res://scenes/dna/DNAFull.png" id="4_8873e"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8873e"]
 
@@ -17,9 +17,9 @@ color_green = Color(0.19607843, 1, 0.19607843, 1)
 label_enabled = true
 outline_size = 2
 icon_enabled = true
-icon_texture = ExtResource("4_gwdo8")
-icon_forced_size = Vector2(64, 64)
-icon_tint = Color(0.81960785, 0.29411766, 0.88235295, 1)
+icon_texture = ExtResource("4_8873e")
+icon_offset = Vector2(60, 0)
+icon_forced_size = Vector2(155, 210)
 metadata/_custom_type_script = "uid://be5ij7yubf56i"
 
 [node name="GameplayUI" type="Control" unique_id=484771056]

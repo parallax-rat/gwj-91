@@ -1,6 +1,8 @@
 class_name AttackComponent
 extends Node2D
 
+signal enemy_death(pattern, channel, message)
+
 @onready var attack_area: Area2D = $AttackRange
 @onready var attack_area_shape: CollisionShape2D = $AttackRange/CollisionShape2D
 @onready var cooldown_timer: Timer = $Cooldown
@@ -21,41 +23,63 @@ extends Node2D
 
 
 var enemies_in_range: Array[Enemy] = []
-var current_target: Enemy = null
+var target: Enemy = null
 var cooldown: bool = false
+var gedis = Gedis.new()
 
 
-func attack(repeat_attack:bool = false) -> void:
-	if cooldown or enemies_in_range.is_empty():
-		return
-	if current_target:
-		CLog.o("Attacking new target.")
-		current_target = enemies_in_range[0]
-	await attack_animation()
-	current_target.take_damage(base_damage)
+func _ready() -> void:
+	self.enemy_death.connect(_on_target_died)
+	gedis.subscribe("enemy_death", self)
+
+
+func _process(delta: float) -> void:
+	cooldown_bar.value = cooldown_timer.time_left
 	
+	if cooldown: ## Is the attack on cooldown?
+		return # Do nothing
+	
+	if target: ## Do I have a target?
+		if enemies_in_range.has(target): ## Is that target still in range?
+			attack()
+	
+	if enemies_in_range.size() > 0: ## Are there enemies in range?
+		target = enemies_in_range[0] # Set closest as the new target
+		attack()
+		## NOTE ---- If closest enemy not being attacked:
+		## --------- might need to check for distance, and
+		## --------- append to a new array on_body_entered 
+		## --------- instead so the index stays ordered.
+
+
+func attack() -> void:
+	if target == null:
+		return
+	attack_sprite.look_at(target.global_position)
+	attack_sprite.play("attack")
+	target.take_damage(base_damage)
+	cooldown_timer.start()
+	cooldown = true
 	## TODO Play SFX
 
 
-func attack_animation() -> void:
-	attack_sprite.look_at(current_target.global_position)
-	attack_sprite.play("attack")
-	await attack_sprite.animation_finished
-
-
 func _on_attack_range_body_entered(body: Node2D) -> void:
-	if not enemies_in_range.has(body):
-		enemies_in_range.append(body)
-		debug_ui.add_range_item(body)
+	enemies_in_range.append(body)
+	gedis.publish("enemy_enter_range", body)
 
 
 func _on_attack_range_body_exited(body: Node2D) -> void:
-	if enemies_in_range.has(body):
-		var index = enemies_in_range.find(body)
-		enemies_in_range.remove_at(index)
-	if enemies_in_range.is_empty():
-		current_target = null
+	var index = enemies_in_range.find(body)
+	enemies_in_range.remove_at(index)
+	gedis.publish("enemy_exit_range", body)
 
 
 func _on_cooldown_timeout() -> void:
+	CLog.o("Cooldown done")
 	cooldown = false
+	gedis.publish("player:attack_cooldown", false)
+
+
+func _on_target_died() -> void:
+	CLog.o("Target killed.")
+	target = null

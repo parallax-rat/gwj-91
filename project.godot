@@ -25,6 +25,8 @@ TweenFX="*uid://d2n10rw2dnx8o"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/window_width_override=960
+window/size/window_height_override=540
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
 
@@ -116,6 +118,7 @@ locale/translations=PackedStringArray("res://addons/maaacks_game_template/base/t
 2d_physics/layer_6="hurt"
 2d_physics/layer_7="heal"
 2d_physics/layer_8="dna_magnet"
+2d_physics/layer_9="spawn_area"
 
 [maaacks_game_template]
 

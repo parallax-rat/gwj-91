@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var parameters: EnemyParameters
 @export var dna_drop: PackedScene
 
+var gedis = Gedis.new()
 
 func _ready() -> void:
 	health_component.max_health = parameters.base_health
@@ -28,19 +29,22 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: int) -> bool:
 	health_component.take_damage(amount)
 	if health_component.current_health <= 0:
 		health_component.is_dead()
+		return true
 	print(name," damaged. ",health_component.current_health, " remaining.")
+	return false
 
 
 func _on_health_component_died() -> void:
+	gedis.publish("enemy_death",self)
 	var dna_drop_quantity = randi_range(parameters.dna_drop_range.x, parameters.dna_drop_range.y)
 	for i in dna_drop_quantity:
 		var new_dna = dna_drop.instantiate()
 		get_tree().root.add_child(new_dna)
-		new_dna.global_position = get_random_direction() * 10
+		new_dna.global_position = get_random_direction() * 1.2
 	CLog.o(name," died.")
 	CLog.o("Dropped ",dna_drop_quantity," DNA")
 	queue_free()

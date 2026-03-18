@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://be5ij7yubf56i" path="res://addons/health_bar_x/runtime/health_bar_x_style.gd" id="4_ytymj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qek5x"]
-radius = 352.0
+radius = 160.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojet8"]
 atlas = ExtResource("2_vjlke")
@@ -71,14 +71,15 @@ animations = [{
 [sub_resource type="Resource" id="Resource_mxkhp"]
 script = ExtResource("4_ytymj")
 fill_color = Color(1, 1, 1, 1)
+border_enabled = false
 border_thickness = 1
 border_color = Color(0.12368315, 0.1236394, 0.14602149, 1)
-shadow_enabled = true
 metadata/_custom_type_script = "uid://be5ij7yubf56i"
 
 [node name="AttackComponent" type="Node2D" unique_id=1963452436]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_vwk26")
-base_range = 352.0
+base_range = 160.0
 
 [node name="AttackRange" type="Area2D" parent="." unique_id=2094870241]
 collision_layer = 0
@@ -94,8 +95,9 @@ one_shot = true
 autostart = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1801738126]
-position = Vector2(0, 1.9073486e-06)
-scale = Vector2(1.5, 2)
+modulate = Color(0.8784314, 0.14509805, 0.8745098, 1)
+position = Vector2(0, 1.4305115e-06)
+scale = Vector2(0.78125, 0.93750006)
 sprite_frames = SubResource("SpriteFrames_yvopo")
 animation = &"attack"
 frame = 7
@@ -107,8 +109,8 @@ position = Vector2(-64, -64)
 script = ExtResource("3_f2uml")
 style = SubResource("Resource_mxkhp")
 bar_size = Vector2(32, 8)
-value = 0.5
-max_value = 0.5
+value = 0.0
+max_value = 1.0
 follow_target = NodePath("..")
 follow_offset = Vector2(0, -42)
 metadata/_custom_type_script = "uid://b0c48ejlnpdqy"
