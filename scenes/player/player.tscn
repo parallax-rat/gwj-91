@@ -7,12 +7,23 @@
 [ext_resource type="Script" uid="uid://cjq0evejvuym0" path="res://addons/indie_game_components/components/vitals/HealthComponent.gd" id="3_gmlin"]
 [ext_resource type="PackedScene" uid="uid://cb7pty3hi22o6" path="res://scenes/player/attacks/attack_component.tscn" id="6_qek5x"]
 [ext_resource type="Texture2D" uid="uid://bsh5v3obra4wi" path="res://scenes/enemy/virus/Virus1.png" id="7_0owmy"]
+[ext_resource type="AudioStream" uid="uid://dvvnywgpulbe6" path="res://scenes/dna/collect.wav" id="8_je7p5"]
+[ext_resource type="AudioStream" uid="uid://ctondsev7f5fb" path="res://scenes/dna/collect2.wav" id="9_fm80t"]
+[ext_resource type="AudioStream" uid="uid://d8glgo2me235" path="res://scenes/dna/collect3.wav" id="10_gx1jg"]
+[ext_resource type="AudioStream" uid="uid://bp5iubaig7jor" path="res://scenes/dna/collect4.wav" id="11_ugbui"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
-radius = 24.0
+radius = 40.792156
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lvxji"]
 radius = 100.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fcs02"]
+streams_count = 4
+stream_0/stream = ExtResource("8_je7p5")
+stream_1/stream = ExtResource("9_fm80t")
+stream_2/stream = ExtResource("10_gx1jg")
+stream_3/stream = ExtResource("11_ugbui")
 
 [node name="Player" type="CharacterBody2D" unique_id=1910550159 groups=["player"]]
 collision_mask = 72
@@ -28,6 +39,7 @@ metadata/_custom_type_script = "uid://dqus7ddco8loo"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=152969569]
 script = ExtResource("3_gmlin")
+invincibility_time = 0.0
 metadata/_custom_type_script = "uid://cjq0evejvuym0"
 
 [node name="AttackComponent" parent="." unique_id=1963452436 instance=ExtResource("6_qek5x")]
@@ -53,5 +65,8 @@ gravity = 500.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DNASiphon" unique_id=831533328]
 shape = SubResource("CircleShape2D_lvxji")
 debug_color = Color(1, 0.31729144, 0.90568215, 0.16470589)
+
+[node name="CollectSFX" type="AudioStreamPlayer2D" parent="." unique_id=622275291]
+stream = SubResource("AudioStreamRandomizer_fcs02")
 
 [connection signal="body_entered" from="DNASiphon" to="." method="_on_dna_siphon_body_entered"]

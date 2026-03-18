@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bqyxhpsv7o4os"
+path="res://.godot/imported/DSGNMisc_HIT-Gore Pierce_HY_PC-002.wav-833aad9377a281def7ffbe72b68c480b.sample"
+
+[deps]
+
+source_file="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-002.wav"
+dest_files=["res://.godot/imported/DSGNMisc_HIT-Gore Pierce_HY_PC-002.wav-833aad9377a281def7ffbe72b68c480b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

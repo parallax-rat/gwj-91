@@ -7,6 +7,14 @@
 [ext_resource type="Script" uid="uid://ww35o3ubyq0s" path="res://resources/diseases/disease.gd" id="3_x8f0n"]
 [ext_resource type="Script" uid="uid://3le7oaejwog" path="res://scenes/enemy/enemy_parameters.gd" id="4_316ce"]
 [ext_resource type="PackedScene" uid="uid://clxqc1vdcnnui" path="res://scenes/dna/dna.tscn" id="6_x8f0n"]
+[ext_resource type="AudioStream" uid="uid://bqyxhpsv7o4os" path="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-002.wav" id="8_bw6yy"]
+[ext_resource type="AudioStream" uid="uid://q7s5rvmsbdj6" path="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-003.wav" id="9_vke1u"]
+[ext_resource type="AudioStream" uid="uid://05cwam018f3j" path="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-004.wav" id="10_ce0r4"]
+[ext_resource type="AudioStream" uid="uid://dtgcuwrx1gk73" path="res://scenes/enemy/t_cells/audio/hit.wav" id="12_vke1u"]
+[ext_resource type="AudioStream" uid="uid://cvx4x7mucrdxg" path="res://scenes/enemy/t_cells/audio/hit2.wav" id="13_ce0r4"]
+[ext_resource type="AudioStream" uid="uid://ctpc3nuvm07ly" path="res://scenes/enemy/t_cells/audio/hit3.wav" id="14_7hgl1"]
+[ext_resource type="AudioStream" uid="uid://c478r8qxtwdio" path="res://scenes/enemy/t_cells/audio/hit4.wav" id="15_eu7ko"]
+[ext_resource type="Texture2D" uid="uid://sofr04mkbshx" path="res://scenes/dna/DNAFragments.png" id="15_vke1u"]
 
 [sub_resource type="Resource" id="Resource_ehali"]
 script = ExtResource("4_316ce")
@@ -18,10 +26,29 @@ dna_drop_range = Vector2i(0, 3)
 metadata/_custom_type_script = "uid://3le7oaejwog"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jf5t1"]
-radius = 58.137768
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x8f0n"]
-radius = 52.611786
+radius = 96.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vke1u"]
+streams_count = 3
+stream_0/stream = ExtResource("8_bw6yy")
+stream_1/stream = ExtResource("9_vke1u")
+stream_2/stream = ExtResource("10_ce0r4")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_r70yv"]
+streams_count = 4
+stream_0/stream = ExtResource("12_vke1u")
+stream_1/stream = ExtResource("13_ce0r4")
+stream_2/stream = ExtResource("14_7hgl1")
+stream_3/stream = ExtResource("15_eu7ko")
+
+[sub_resource type="Curve" id="Curve_vke1u"]
+_data = [Vector2(0.004866183, 0.99393666), 0.0, -3.5304344, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_vke1u"]
 
 [node name="Enemy" type="CharacterBody2D" unique_id=2119407830]
 collision_layer = 4
@@ -35,7 +62,6 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_jf5t1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1042461258]
-visible = false
 shape = SubResource("CircleShape2D_jf5t1")
 debug_color = Color(0.9647059, 0, 0.16862746, 0.41960785)
 
@@ -50,7 +76,6 @@ collision_layer = 0
 input_pickable = false
 
 [node name="DamageShape" type="CollisionShape2D" parent="DamageArea" unique_id=2028847096]
-visible = false
 shape = SubResource("CircleShape2D_x8f0n")
 debug_color = Color(0.9999998, 0.0094214985, 0.06508232, 0.41960785)
 
@@ -58,6 +83,33 @@ debug_color = Color(0.9999998, 0.0094214985, 0.06508232, 0.41960785)
 process_callback = 0
 wait_time = 2.0
 one_shot = true
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=224401569]
+stream = SubResource("AudioStreamRandomizer_vke1u")
+
+[node name="AttackSFX" type="AudioStreamPlayer2D" parent="." unique_id=1711904324]
+stream = SubResource("AudioStreamRandomizer_r70yv")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=192554200]
+emitting = false
+texture = ExtResource("15_vke1u")
+lifetime = 2.65
+one_shot = true
+speed_scale = 2.21
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 712.66
+initial_velocity_max = 869.82
+linear_accel_min = 5.0
+linear_accel_max = 20.0
+damping_min = 30.661
+damping_max = 61.713
+scale_amount_curve = SubResource("Curve_vke1u")
+color = Color(0.7882353, 0.7372549, 0.41960785, 1)
+color_ramp = SubResource("Gradient_vke1u")
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

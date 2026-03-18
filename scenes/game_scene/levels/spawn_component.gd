@@ -12,8 +12,8 @@ extends Node2D
 @export var enemy_spawn_frequency: int = 5
 @export_category("DNAPickup")
 @export var dna_scene: PackedScene
-@export var min_dna_to_spawn: int
-@export var max_dna_to_spawn: int
+@export var min_dna_to_spawn: int = 1
+@export var max_dna_to_spawn: int = 3
 
 var time_tick = TimeTick.new()
 var gedis = Gedis.new()

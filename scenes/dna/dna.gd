@@ -56,4 +56,5 @@ func _physics_process(delta: float) -> void:
 
 func collect_dna() -> void:
 	player.increase_dna(1)
+	
 	queue_free()

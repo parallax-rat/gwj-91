@@ -10,6 +10,7 @@ signal enemy_death(pattern, channel, message)
 @onready var debug_ui: Control = get_tree().get_first_node_in_group("debug_ui")
 @onready var attack_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var cooldown_bar: HealthBarX2D = $CooldownBar
+@onready var attack_sfx: AudioStreamPlayer2D = $AttackSFX
 
 
 ## How wide the attack ring is without any mutations
@@ -60,7 +61,7 @@ func attack() -> void:
 	target.take_damage(base_damage)
 	cooldown_timer.start()
 	cooldown = true
-	## TODO Play SFX
+	attack_sfx.play()
 
 
 func _on_attack_range_body_entered(body: Node2D) -> void:

@@ -4,6 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://ddg3ir8quehpo" path="res://scenes/player/attacks/projetilNew.png" id="2_vjlke"]
 [ext_resource type="Script" uid="uid://b0c48ejlnpdqy" path="res://addons/health_bar_x/runtime/health_bar_x_2d.gd" id="3_f2uml"]
 [ext_resource type="Script" uid="uid://be5ij7yubf56i" path="res://addons/health_bar_x/runtime/health_bar_x_style.gd" id="4_ytymj"]
+[ext_resource type="AudioStream" uid="uid://fnerc0kdpovb" path="res://scenes/player/attacks/basic/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-001.wav" id="5_pesfu"]
+[ext_resource type="AudioStream" uid="uid://dfhxyasa61u0p" path="res://scenes/player/attacks/basic/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-003.wav" id="6_ojet8"]
+[ext_resource type="AudioStream" uid="uid://cdyfx0hn0vs6f" path="res://scenes/player/attacks/basic/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-005.wav" id="7_yvopo"]
+[ext_resource type="AudioStream" uid="uid://cp3g5ue5gkemv" path="res://scenes/player/attacks/basic/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-006.wav" id="8_apw2i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qek5x"]
 radius = 160.0
@@ -76,6 +80,13 @@ border_thickness = 1
 border_color = Color(0.12368315, 0.1236394, 0.14602149, 1)
 metadata/_custom_type_script = "uid://be5ij7yubf56i"
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v7aku"]
+streams_count = 4
+stream_0/stream = ExtResource("5_pesfu")
+stream_1/stream = ExtResource("6_ojet8")
+stream_2/stream = ExtResource("7_yvopo")
+stream_3/stream = ExtResource("8_apw2i")
+
 [node name="AttackComponent" type="Node2D" unique_id=1963452436]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_vwk26")
@@ -114,6 +125,9 @@ max_value = 1.0
 follow_target = NodePath("..")
 follow_offset = Vector2(0, -42)
 metadata/_custom_type_script = "uid://b0c48ejlnpdqy"
+
+[node name="AttackSFX" type="AudioStreamPlayer2D" parent="." unique_id=1942078567]
+stream = SubResource("AudioStreamRandomizer_v7aku")
 
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]

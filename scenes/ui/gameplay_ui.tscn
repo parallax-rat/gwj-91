@@ -12,14 +12,16 @@
 
 [sub_resource type="Resource" id="Resource_8873e"]
 script = ExtResource("2_soafi")
-fill_color = Color(0.81960785, 0.29411766, 0.88235295, 1)
+roundness = 0.0
+fill_inset = Vector2(1, 1)
+fill_color = Color(0.19607843, 1, 0.19607843, 1)
 color_green = Color(0.19607843, 1, 0.19607843, 1)
-label_enabled = true
+border_color = Color(0.23137255, 0.3372549, 0.2509804, 1)
 outline_size = 2
 icon_enabled = true
 icon_texture = ExtResource("4_8873e")
-icon_offset = Vector2(60, 0)
-icon_forced_size = Vector2(155, 210)
+icon_offset = Vector2(50, 0)
+icon_forced_size = Vector2(77.5, 105)
 metadata/_custom_type_script = "uid://be5ij7yubf56i"
 
 [node name="GameplayUI" type="Control" unique_id=484771056]
