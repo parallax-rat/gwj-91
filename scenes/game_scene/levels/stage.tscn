@@ -2,25 +2,25 @@
 
 [ext_resource type="Texture2D" uid="uid://cms6tsihuoaon" path="res://scenes/game_scene/levels/BG.png" id="1_0e2qu"]
 [ext_resource type="PackedScene" uid="uid://clxqc1vdcnnui" path="res://scenes/dna/dna.tscn" id="1_i7qv5"]
-[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="1_lxudy"]
 [ext_resource type="PackedScene" uid="uid://bfi0q51set0hr" path="res://scenes/player/player.tscn" id="2_ggu3y"]
 [ext_resource type="PackedScene" uid="uid://d0c5fl58ym4t0" path="res://scenes/ui/debug/debug_ui.tscn" id="2_hovcq"]
-[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_qb51w"]
 [ext_resource type="PackedScene" uid="uid://b2ihdqqi3bfvl" path="res://scenes/ui/gameplay_ui.tscn" id="3_ggu3y"]
-[ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="6_dgsc6"]
-[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_hovcq"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_dgsc6"]
 [ext_resource type="Script" uid="uid://dha0jx3poh0ft" path="res://scenes/game_scene/levels/spawn_component.gd" id="8_qb51w"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_effch"]
 [ext_resource type="PackedScene" uid="uid://vrcprlyh2e5e" path="res://scenes/enemy/t_cells/t_cell_1.tscn" id="9_hovcq"]
-
-[sub_resource type="Resource" id="Resource_0e2qu"]
-script = ExtResource("2_qb51w")
-
-[sub_resource type="Resource" id="Resource_effch"]
-script = ExtResource("6_dgsc6")
-metadata/_custom_type_script = "uid://dimvdouy8g0sv"
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_m7ppb"]
+[ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="11_fukny"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e2qu"]
 size = Vector2(1920, 1920)
+
+[sub_resource type="Resource" id="Resource_ix8bu"]
+script = ExtResource("10_m7ppb")
+
+[sub_resource type="Resource" id="Resource_t70pv"]
+script = ExtResource("11_fukny")
+metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 
 [node name="Stage" type="Node2D" unique_id=1128801347]
 
@@ -35,39 +35,10 @@ layer = 2
 [node name="DebugUI" parent="CanvasLayer" unique_id=1141851296 instance=ExtResource("2_hovcq")]
 visible = false
 
-[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1013246708 node_paths=PackedStringArray("follow_target") groups=["stage_camera"]]
-top_level = true
-script = ExtResource("1_lxudy")
-follow_mode = 5
-follow_target = NodePath("../Player")
-zoom = Vector2(1.2, 1.2)
-tween_resource = SubResource("Resource_0e2qu")
-follow_damping = true
-draw_limits = true
-limit_target = NodePath("../CameraLimitZone/CollisionShape2D")
-noise = SubResource("Resource_effch")
-metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1268559613]
-physics_interpolation_mode = 1
-top_level = true
-offset = Vector2(-2.0308466, -2.4538832)
-zoom = Vector2(1.2, 1.2)
-limit_left = -960
-limit_top = -960
-limit_right = 960
-limit_bottom = 960
-editor_draw_limits = true
-
-[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=298309258]
-process_priority = 300
-process_physics_priority = 300
-script = ExtResource("7_hovcq")
-
 [node name="Player" parent="." unique_id=1910550159 instance=ExtResource("2_ggu3y")]
 unique_name_in_owner = true
 
-[node name="SpawnComponent" type="Node2D" parent="." unique_id=737466401 node_paths=PackedStringArray("spawn_area")]
+[node name="SpawnComponent" type="Node2D" parent="." unique_id=737466401 node_paths=PackedStringArray("spawn_area") groups=["spawn_component"]]
 script = ExtResource("8_qb51w")
 spawn_area = NodePath("../SpawnArea")
 enemy_scene = ExtResource("9_hovcq")
@@ -89,9 +60,48 @@ collision_layer = 256
 collision_mask = 256
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpawnArea" unique_id=1721160685]
+visible = false
 polygon = PackedVector2Array(-894, -919, -784, -924, -655, -909, -466, -926, -374, -904, -238, -936, -129, -921, -37, -943, 82, -924, 163, -935, 243, -925, 320, -941, 408, -930, 472, -942, 548, -931, 688, -937, 822, -931, 897, -940, 939, -915, 927, -875, 935, -803, 950, -711, 933, -661, 945, -597, 936, -532, 933, -389, 910, -285, 947, -176, 915, -45, 921, 85, 934, 146, 909, 234, 921, 322, 906, 429, 936, 528, 928, 578, 943, 624, 936, 684, 920, 741, 936, 801, 933, 883, 868, 930, 782, 917, 628, 946, 524, 920, 366, 941, 241, 926, 109, 945, 39, 924, -118, 933, -215, 950, -303, 922, -398, 912, -493, 925, -571, 923, -673, 941, -757, 926, -834, 944, -913, 920, -945, 888, -950, 779, -927, 683, -942, 569, -920, 494, -935, 415, -917, 339, -931, 273, -905, 35, -948, -103, -950, -203, -936, -251, -940, -342, -915, -438, -935, -554, -915, -616, -933, -781, -905, -860)
 
 [node name="CameraLimitZone" type="Area2D" parent="." unique_id=304757325]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraLimitZone" unique_id=1644512130]
+visible = false
 shape = SubResource("RectangleShape2D_0e2qu")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1701545518]
+physics_interpolation_mode = 1
+top_level = true
+offset = Vector2(0.5044039, 0.5220372)
+zoom = Vector2(1.5, 1.5)
+limit_left = -960
+limit_top = -960
+limit_right = 960
+limit_bottom = 960
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=324828937]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("8_dgsc6")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=589726765 node_paths=PackedStringArray("follow_target") groups=["stage_camera"]]
+top_level = true
+script = ExtResource("9_effch")
+follow_mode = 5
+follow_target = NodePath("../Player")
+zoom = Vector2(1.5, 1.5)
+tween_resource = SubResource("Resource_ix8bu")
+follow_damping = true
+draw_limits = true
+limit_target = NodePath("../CameraLimitZone/CollisionShape2D")
+noise = SubResource("Resource_t70pv")
+
+[node name="DNA" parent="." unique_id=671490013 instance=ExtResource("1_i7qv5")]
+position = Vector2(-704, -704)
+
+[node name="DNA2" parent="." unique_id=192939705 instance=ExtResource("1_i7qv5")]
+position = Vector2(512, -832)
+
+[node name="DNA3" parent="." unique_id=1431046215 instance=ExtResource("1_i7qv5")]
+position = Vector2(512, 576)

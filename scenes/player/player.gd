@@ -8,9 +8,9 @@ extends CharacterBody2D
 
 
 func _on_dna_siphon_body_entered(body: Node2D) -> void:
-	if body is DNAPickup and body.get_leader() == null:
-		body.set_leader(self)
+	if body is DNAPickup:
+		body.collecting = true
 
 
-func increase_dna(amount:float) -> void:
+func increase_dna(amount:int) -> void:
 	dna.increase(amount)

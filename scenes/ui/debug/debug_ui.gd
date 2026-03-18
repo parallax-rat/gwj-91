@@ -11,6 +11,6 @@ func _ready() -> void:
 	gedis.subscribe("time", self)
 
 
-func _on_time_tick(channel, message) -> void:
+func _on_time_tick(_channel, message) -> void:
 	CLog.o("Time tick")
 	time_tick_label.text = str(message)

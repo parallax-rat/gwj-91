@@ -1,8 +1,6 @@
 class_name SpawnComponent
 extends Node2D
 
-signal pubsub_message(channel, message)
-
 @onready var camera: PhantomCamera2D = get_tree().get_nodes_in_group("stage_camera")[0]
 @onready var time_tick_label: Label = get_tree().get_nodes_in_group("tick_time_label")[0]
 @export var spawn_area: Area2D
@@ -21,13 +19,28 @@ var time_tick = TimeTick.new()
 var gedis = Gedis.new()
 
 func _ready() -> void:
-	self.pubsub_message.connect(_on_spawn_request)
 	time_tick.initialize()
 	time_tick.connect("tick_updated", _on_tick_updated)
 
 
-func _on_spawn_request() -> void:
-	pass
+func spawn_dna_on_death(pos:Vector2) -> void:
+	var dna_drop_quantity = randi_range(min_dna_to_spawn,max_dna_to_spawn)
+	for i in dna_drop_quantity:
+		var new_dna = dna_scene.instantiate()
+		add_child(new_dna)
+		new_dna.global_position = pos
+		new_dna.random_spawn()
+
+
+func get_random_direction_2d() -> Vector2:
+	# Start with a base direction, e.g., Vector2.RIGHT or Vector2(1, 0)
+	var base_direction := Vector2.RIGHT
+	# Generate a random angle in radians (TAU is 360 degrees)
+	var random_angle := randf_range(0, TAU)
+	# Rotate the base direction by the random angle
+	var random_direction := base_direction.rotated(random_angle)
+	return random_direction
+
 
 
 func _on_tick_updated(current_tick:int) -> void:
@@ -42,7 +55,7 @@ func spawn_enemy() -> void:
 		var offscreen_location: Vector2
 		var is_location_spawn_safe: bool = false
 		while is_location_spawn_safe == false:
-			offscreen_location = get_random_offscreen_position(camera)
+			offscreen_location = get_random_offscreen_position()
 			if is_point_in_area(offscreen_location,spawn_area):
 				is_location_spawn_safe = true
 		var new_enemy = enemy_scene.instantiate()
@@ -50,7 +63,7 @@ func spawn_enemy() -> void:
 		new_enemy.global_position = offscreen_location
 		gedis.publish("enemy_spawn", new_enemy)
 
-func get_random_offscreen_position(camera: PhantomCamera2D, margin: float = 20.0) -> Vector2:
+func get_random_offscreen_position(margin: float = 20.0) -> Vector2:
 	var viewport_size = get_viewport_rect().size / camera.zoom
 	
 	var center = camera.global_position

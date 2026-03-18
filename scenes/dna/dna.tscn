@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://clxqc1vdcnnui"]
 
 [ext_resource type="Script" uid="uid://bmv8ad07efyyh" path="res://scenes/dna/dna.gd" id="1_om8ne"]
-[ext_resource type="Texture2D" uid="uid://dsup7ug6wi234" path="res://addons/icon_widget/local_icons/material-icon-theme/crystal.png" id="1_yt7vt"]
-[ext_resource type="Script" uid="uid://c0fleo1c7sluj" path="res://addons/indie_game_components/components/movement/EightDirFollowerComponent.gd" id="3_g8yjs"]
+[ext_resource type="Texture2D" uid="uid://sofr04mkbshx" path="res://scenes/dna/DNAFragments.png" id="2_g8yjs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yt7vt"]
-radius = 6.0
+radius = 32.0
 
 [node name="DNA" type="CharacterBody2D" unique_id=671490013]
 collision_layer = 2
@@ -14,18 +13,12 @@ motion_mode = 1
 script = ExtResource("1_om8ne")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2108022924]
-modulate = Color(0.81960785, 0.29411766, 0.88235295, 1)
-scale = Vector2(0.0625, 0.0625)
-texture = ExtResource("1_yt7vt")
+texture = ExtResource("2_g8yjs")
+region_enabled = true
+region_rect = Rect2(36, 40, 46, 46)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=955650286]
 shape = SubResource("CircleShape2D_yt7vt")
-
-[node name="EightDirFollowerComponent" type="Node" parent="." unique_id=1926865580]
-script = ExtResource("3_g8yjs")
-separation = 0.0
-enabled = false
-metadata/_custom_type_script = "uid://c0fleo1c7sluj"
 
 [node name="Label" type="Label" parent="." unique_id=1594954532]
 visible = false

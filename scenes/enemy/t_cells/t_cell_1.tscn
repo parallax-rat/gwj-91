@@ -15,8 +15,3 @@ visible = true
 
 [node name="DamageShape" parent="DamageArea" parent_id_path=PackedInt32Array(1499775764) index="0" unique_id=2028847096]
 visible = true
-
-[node name="TweenFXComponent" parent="." index="5" unique_id=2117449447 node_paths=PackedStringArray("sprite_2d")]
-tween_animation = 41
-tween_type = 1
-sprite_2d = NodePath("../Sprite2D")

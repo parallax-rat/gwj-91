@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var damage_shape: CollisionShape2D = $DamageArea/DamageShape
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var player: Player = get_tree().get_first_node_in_group("player")
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 @export var parameters: EnemyParameters
 @export var dna_drop: PackedScene
@@ -13,6 +14,7 @@ extends CharacterBody2D
 var gedis = Gedis.new()
 
 func _ready() -> void:
+	#TweenFX.idle_rubber(sprite_2d,3,0.4)
 	health_component.max_health = parameters.base_health
 
 
@@ -39,17 +41,6 @@ func take_damage(amount: int) -> bool:
 
 
 func _on_health_component_died() -> void:
-	gedis.publish("enemy_death",self)
-	var dna_drop_quantity = randi_range(parameters.dna_drop_range.x, parameters.dna_drop_range.y)
-	for i in dna_drop_quantity:
-		var new_dna = dna_drop.instantiate()
-		get_tree().root.add_child(new_dna)
-		new_dna.global_position = get_random_direction() * 1.2
-	CLog.o(name," died.")
-	CLog.o("Dropped ",dna_drop_quantity," DNA")
+	get_tree().get_first_node_in_group("spawn_component").spawn_dna_on_death(global_position)
+	#TweenFX.stop_all(self)
 	queue_free()
-
-
-func get_random_direction() -> Vector2:
-	var random_angle = randf() * TAU
-	return Vector2.from_angle(random_angle)

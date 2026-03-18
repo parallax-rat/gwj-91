@@ -33,7 +33,7 @@ func _ready() -> void:
 	gedis.subscribe("enemy_death", self)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	cooldown_bar.value = cooldown_timer.time_left
 	
 	if cooldown: ## Is the attack on cooldown?

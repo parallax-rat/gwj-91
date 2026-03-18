@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://ww35o3ubyq0s" path="res://resources/diseases/disease.gd" id="3_x8f0n"]
 [ext_resource type="Script" uid="uid://3le7oaejwog" path="res://scenes/enemy/enemy_parameters.gd" id="4_316ce"]
 [ext_resource type="PackedScene" uid="uid://clxqc1vdcnnui" path="res://scenes/dna/dna.tscn" id="6_x8f0n"]
-[ext_resource type="Script" uid="uid://bft4napdn16c3" path="res://scenes/enemy/tween_fx_component.gd" id="8_316ce"]
 
 [sub_resource type="Resource" id="Resource_ehali"]
 script = ExtResource("4_316ce")
@@ -26,7 +25,7 @@ radius = 52.611786
 
 [node name="Enemy" type="CharacterBody2D" unique_id=2119407830]
 collision_layer = 4
-collision_mask = 8
+collision_mask = 13
 script = ExtResource("1_23iyx")
 parameters = SubResource("Resource_ehali")
 dna_drop = ExtResource("6_x8f0n")
@@ -59,9 +58,6 @@ debug_color = Color(0.9999998, 0.0094214985, 0.06508232, 0.41960785)
 process_callback = 0
 wait_time = 2.0
 one_shot = true
-
-[node name="TweenFXComponent" type="Node" parent="." unique_id=2117449447]
-script = ExtResource("8_316ce")
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
