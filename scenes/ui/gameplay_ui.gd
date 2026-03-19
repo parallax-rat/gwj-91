@@ -1,9 +1,9 @@
 extends Control
 
-@onready var player_hp_bar: HealthBarXControl = %PlayerHPBar
-@onready var player_dna_bar: HealthBarXControl = %PlayerDNABar
+@export var player: Player
+@export var player_hp_bar: HealthBarXControl
+@export var player_dna_bar: HealthBarXControl
 
-@onready var player: Player = get_tree().get_nodes_in_group("player")[0]
 
 func _ready() -> void:
 	player.dna.value_changed.connect(_on_dna_changed)

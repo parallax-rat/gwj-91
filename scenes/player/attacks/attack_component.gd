@@ -1,8 +1,6 @@
 class_name AttackComponent
 extends Node2D
 
-signal enemy_death(pattern, channel, message)
-
 @onready var attack_area: Area2D = $AttackRange
 @onready var attack_area_shape: CollisionShape2D = $AttackRange/CollisionShape2D
 @onready var cooldown_timer: Timer = $Cooldown
@@ -21,17 +19,20 @@ signal enemy_death(pattern, channel, message)
 @export var base_cooldown: float = 1
 ## How many enemies it can hit at once without any mutations
 @export var base_targets: int = 1
+@export var evolutions: Array[Evolution]
 
 
 var enemies_in_range: Array[Enemy] = []
-var target: Enemy = null
+var target: Enemy = null:
+	set(value):
+		target = value
 var cooldown: bool = false
-var gedis = Gedis.new()
 
 
 func _ready() -> void:
-	self.enemy_death.connect(_on_target_died)
-	gedis.subscribe("enemy_death", self)
+	attack_area_shape.shape.radius = base_range
+	CLog.c(Color.YELLOW,"Attack Radius: " + str(attack_area_shape.shape.radius))
+	CLog.c(Color.CADET_BLUE,"Target: " + str(target))
 
 
 func _process(_delta: float) -> void:
@@ -45,6 +46,7 @@ func _process(_delta: float) -> void:
 			attack()
 	
 	if enemies_in_range.size() > 0: ## Are there enemies in range?
+		CLog.c(Color.RED, "Enemies in range: " + str(enemies_in_range))
 		target = enemies_in_range[0] # Set closest as the new target
 		attack()
 		## NOTE ---- If closest enemy not being attacked:
@@ -54,6 +56,7 @@ func _process(_delta: float) -> void:
 
 
 func attack() -> void:
+	CLog.o("Attack target: ",target)
 	if target == null:
 		return
 	attack_sprite.look_at(target.global_position)
@@ -65,20 +68,19 @@ func attack() -> void:
 
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
-	enemies_in_range.append(body)
-	gedis.publish("enemy_enter_range", body)
+	var new_enemy_target: Enemy = body
+	if new_enemy_target.valid_target == true:
+		enemies_in_range.append(new_enemy_target)
 
 
 func _on_attack_range_body_exited(body: Node2D) -> void:
 	var index = enemies_in_range.find(body)
 	enemies_in_range.remove_at(index)
-	gedis.publish("enemy_exit_range", body)
 
 
 func _on_cooldown_timeout() -> void:
 	CLog.o("Cooldown done")
 	cooldown = false
-	gedis.publish("player:attack_cooldown", false)
 
 
 func _on_target_died() -> void:

@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cms6tsihuoaon" path="res://scenes/game_scene/levels/BG.png" id="1_0e2qu"]
 [ext_resource type="PackedScene" uid="uid://clxqc1vdcnnui" path="res://scenes/dna/dna.tscn" id="1_i7qv5"]
 [ext_resource type="PackedScene" uid="uid://bfi0q51set0hr" path="res://scenes/player/player.tscn" id="2_ggu3y"]
-[ext_resource type="PackedScene" uid="uid://d0c5fl58ym4t0" path="res://scenes/ui/debug/debug_ui.tscn" id="2_hovcq"]
 [ext_resource type="PackedScene" uid="uid://b2ihdqqi3bfvl" path="res://scenes/ui/gameplay_ui.tscn" id="3_ggu3y"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_dgsc6"]
 [ext_resource type="Script" uid="uid://dha0jx3poh0ft" path="res://scenes/game_scene/levels/spawn_component.gd" id="8_qb51w"]
@@ -24,16 +23,15 @@ metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 
 [node name="Stage" type="Node2D" unique_id=1128801347]
 
-[node name="Backgrouind" type="Sprite2D" parent="." unique_id=1153422835]
+[node name="Background" type="Sprite2D" parent="." unique_id=1153422835]
+z_index = -5
 texture = ExtResource("1_0e2qu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1985399792]
 layer = 2
 
-[node name="GameplayUI" parent="CanvasLayer" unique_id=484771056 instance=ExtResource("3_ggu3y")]
-
-[node name="DebugUI" parent="CanvasLayer" unique_id=1141851296 instance=ExtResource("2_hovcq")]
-visible = false
+[node name="GameplayUI" parent="CanvasLayer" unique_id=484771056 node_paths=PackedStringArray("player") instance=ExtResource("3_ggu3y")]
+player = NodePath("../../Player")
 
 [node name="Player" parent="." unique_id=1910550159 instance=ExtResource("2_ggu3y")]
 unique_name_in_owner = true
@@ -41,11 +39,11 @@ unique_name_in_owner = true
 [node name="SpawnComponent" type="Node2D" parent="." unique_id=737466401 node_paths=PackedStringArray("spawn_area") groups=["spawn_component"]]
 script = ExtResource("8_qb51w")
 spawn_area = NodePath("../SpawnArea")
+enabled = false
 enemy_scene = ExtResource("9_hovcq")
-enemy_to_spawn = 3
-enemy_spawn_frequency = 2
+enemy_to_spawn = 1
+enemy_spawn_frequency = 1
 dna_scene = ExtResource("1_i7qv5")
-max_dna_to_spawn = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=379697382]
 collision_layer = 8
@@ -72,8 +70,8 @@ shape = SubResource("RectangleShape2D_0e2qu")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1701545518]
 physics_interpolation_mode = 1
 top_level = true
-offset = Vector2(0.5044039, 0.5220372)
-zoom = Vector2(1.5, 1.5)
+offset = Vector2(-2.7235234, -2.4702098)
+zoom = Vector2(1.3, 1.3)
 limit_left = -960
 limit_top = -960
 limit_right = 960
@@ -90,18 +88,9 @@ top_level = true
 script = ExtResource("9_effch")
 follow_mode = 5
 follow_target = NodePath("../Player")
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(1.3, 1.3)
 tween_resource = SubResource("Resource_ix8bu")
 follow_damping = true
 draw_limits = true
 limit_target = NodePath("../CameraLimitZone/CollisionShape2D")
 noise = SubResource("Resource_t70pv")
-
-[node name="DNA" parent="." unique_id=671490013 instance=ExtResource("1_i7qv5")]
-position = Vector2(-704, -704)
-
-[node name="DNA2" parent="." unique_id=192939705 instance=ExtResource("1_i7qv5")]
-position = Vector2(512, -832)
-
-[node name="DNA3" parent="." unique_id=1431046215 instance=ExtResource("1_i7qv5")]
-position = Vector2(512, 576)

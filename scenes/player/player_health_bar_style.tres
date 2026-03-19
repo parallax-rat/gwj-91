@@ -5,9 +5,12 @@
 
 [resource]
 script = ExtResource("2_ua3he")
-roundness = 0.0
-fill_color = Color(0.81960785, 0.29411766, 0.88235295, 1)
+roundness = 5.0
+fill_inset = Vector2(4, 4)
+fill_color = Color(0.96862745, 0.6117647, 0.9647059, 1)
+border_color = Color(0, 0, 0, 1)
 icon_enabled = true
 icon_texture = ExtResource("1_1eg6f")
+icon_offset = Vector2(24, 0)
 icon_forced_size = Vector2(64, 64)
 metadata/_custom_type_script = "uid://be5ij7yubf56i"

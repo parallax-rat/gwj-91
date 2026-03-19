@@ -17,7 +17,8 @@ var collecting: bool = false
 var collection_time_elapsed: float = 1.0
 
 func _ready() -> void:
-	pass
+	TweenFX.orbit(sprite,1,1,0)
+	TweenFX.glow_pulse(sprite,1,.1,.5)
 	## TODO Randomize sprite on spawn
 
 

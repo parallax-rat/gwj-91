@@ -2,11 +2,10 @@
 
 [ext_resource type="Script" uid="uid://sh5cpw3p0vye" path="res://scenes/enemy/base_enemy.gd" id="1_23iyx"]
 [ext_resource type="Texture2D" uid="uid://b4cyevdfdvf83" path="res://addons/icon_widget/local_icons/carbon/circle-filled.png" id="1_jf5t1"]
+[ext_resource type="StatPool" uid="uid://13iaqcellv8q" path="res://scenes/enemy/t_cells/t_cell_1_health_pool.tres" id="2_ch7dm"]
 [ext_resource type="Script" uid="uid://b68cg8nxapo32" path="res://resources/abilities/ability.gd" id="2_se4xw"]
-[ext_resource type="Script" uid="uid://cjq0evejvuym0" path="res://addons/indie_game_components/components/vitals/HealthComponent.gd" id="3_eb5uv"]
 [ext_resource type="Script" uid="uid://ww35o3ubyq0s" path="res://resources/diseases/disease.gd" id="3_x8f0n"]
 [ext_resource type="Script" uid="uid://3le7oaejwog" path="res://scenes/enemy/enemy_parameters.gd" id="4_316ce"]
-[ext_resource type="PackedScene" uid="uid://clxqc1vdcnnui" path="res://scenes/dna/dna.tscn" id="6_x8f0n"]
 [ext_resource type="AudioStream" uid="uid://bqyxhpsv7o4os" path="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-002.wav" id="8_bw6yy"]
 [ext_resource type="AudioStream" uid="uid://q7s5rvmsbdj6" path="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-003.wav" id="9_vke1u"]
 [ext_resource type="AudioStream" uid="uid://05cwam018f3j" path="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-004.wav" id="10_ce0r4"]
@@ -14,7 +13,6 @@
 [ext_resource type="AudioStream" uid="uid://cvx4x7mucrdxg" path="res://scenes/enemy/t_cells/audio/hit2.wav" id="13_ce0r4"]
 [ext_resource type="AudioStream" uid="uid://ctpc3nuvm07ly" path="res://scenes/enemy/t_cells/audio/hit3.wav" id="14_7hgl1"]
 [ext_resource type="AudioStream" uid="uid://c478r8qxtwdio" path="res://scenes/enemy/t_cells/audio/hit4.wav" id="15_eu7ko"]
-[ext_resource type="Texture2D" uid="uid://sofr04mkbshx" path="res://scenes/dna/DNAFragments.png" id="15_vke1u"]
 
 [sub_resource type="Resource" id="Resource_ehali"]
 script = ExtResource("4_316ce")
@@ -29,7 +27,7 @@ metadata/_custom_type_script = "uid://3le7oaejwog"
 radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x8f0n"]
-radius = 96.0
+radius = 54.08327
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vke1u"]
 streams_count = 3
@@ -44,32 +42,22 @@ stream_1/stream = ExtResource("13_ce0r4")
 stream_2/stream = ExtResource("14_7hgl1")
 stream_3/stream = ExtResource("15_eu7ko")
 
-[sub_resource type="Curve" id="Curve_vke1u"]
-_data = [Vector2(0.004866183, 0.99393666), 0.0, -3.5304344, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_vke1u"]
-
 [node name="Enemy" type="CharacterBody2D" unique_id=2119407830]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 13
 script = ExtResource("1_23iyx")
+health = ExtResource("2_ch7dm")
 parameters = SubResource("Resource_ehali")
-dna_drop = ExtResource("6_x8f0n")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1494801482]
+z_index = 1
+y_sort_enabled = true
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_jf5t1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1042461258]
 shape = SubResource("CircleShape2D_jf5t1")
 debug_color = Color(0.9647059, 0, 0.16862746, 0.41960785)
-
-[node name="HealthComponent" type="Node" parent="." unique_id=1432330779]
-script = ExtResource("3_eb5uv")
-max_health = 5
-invincibility_time = 0.0
-metadata/_custom_type_script = "uid://cjq0evejvuym0"
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=1499775764]
 collision_layer = 0
@@ -90,27 +78,8 @@ stream = SubResource("AudioStreamRandomizer_vke1u")
 [node name="AttackSFX" type="AudioStreamPlayer2D" parent="." unique_id=1711904324]
 stream = SubResource("AudioStreamRandomizer_r70yv")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=192554200]
-emitting = false
-texture = ExtResource("15_vke1u")
-lifetime = 2.65
-one_shot = true
-speed_scale = 2.21
-explosiveness = 1.0
-randomness = 1.0
-direction = Vector2(0, 0)
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 712.66
-initial_velocity_max = 869.82
-linear_accel_min = 5.0
-linear_accel_max = 20.0
-damping_min = 30.661
-damping_max = 61.713
-scale_amount_curve = SubResource("Curve_vke1u")
-color = Color(0.7882353, 0.7372549, 0.41960785, 1)
-color_ramp = SubResource("Gradient_vke1u")
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1946656484]
+rect = Rect2(-32, -32, 64, 64)
 
-[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
-[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="timeout" from="DamageDelay" to="." method="_on_damage_delay_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

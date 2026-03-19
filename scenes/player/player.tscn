@@ -4,16 +4,22 @@
 [ext_resource type="Script" uid="uid://cb27mxocmn07i" path="res://scenes/player/player.gd" id="1_lvxji"]
 [ext_resource type="StatPool" uid="uid://sqms50b2qn0a" path="res://scenes/player/health_stat_pool.tres" id="2_75vfm"]
 [ext_resource type="StatPool" uid="uid://b8v86lv7uuyj8" path="res://scenes/player/dna_stat_pool.tres" id="3_0owmy"]
-[ext_resource type="Script" uid="uid://cjq0evejvuym0" path="res://addons/indie_game_components/components/vitals/HealthComponent.gd" id="3_gmlin"]
 [ext_resource type="PackedScene" uid="uid://cb7pty3hi22o6" path="res://scenes/player/attacks/attack_component.tscn" id="6_qek5x"]
 [ext_resource type="Texture2D" uid="uid://bsh5v3obra4wi" path="res://scenes/enemy/virus/Virus1.png" id="7_0owmy"]
+[ext_resource type="Shader" uid="uid://dr8jwnnc1up7e" path="res://shaders/shaderlib/dynamic_drop_shadow_canvasitem_no_colorrect_needed.gdshader" id="7_fm80t"]
 [ext_resource type="AudioStream" uid="uid://dvvnywgpulbe6" path="res://scenes/dna/collect.wav" id="8_je7p5"]
 [ext_resource type="AudioStream" uid="uid://ctondsev7f5fb" path="res://scenes/dna/collect2.wav" id="9_fm80t"]
 [ext_resource type="AudioStream" uid="uid://d8glgo2me235" path="res://scenes/dna/collect3.wav" id="10_gx1jg"]
 [ext_resource type="AudioStream" uid="uid://bp5iubaig7jor" path="res://scenes/dna/collect4.wav" id="11_ugbui"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gx1jg"]
+shader = ExtResource("7_fm80t")
+shader_parameter/dist = 0
+shader_parameter/color = Color(0, 0, 0, 0.5)
+shader_parameter/angle = 249.27201184042
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
-radius = 40.792156
+radius = 37.215588
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lvxji"]
 radius = 100.0
@@ -37,18 +43,14 @@ script = ExtResource("1_dovo2")
 speed = 350.0
 metadata/_custom_type_script = "uid://dqus7ddco8loo"
 
-[node name="HealthComponent" type="Node" parent="." unique_id=152969569]
-script = ExtResource("3_gmlin")
-invincibility_time = 0.0
-metadata/_custom_type_script = "uid://cjq0evejvuym0"
-
-[node name="AttackComponent" parent="." unique_id=1963452436 instance=ExtResource("6_qek5x")]
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=203274411]
+material = SubResource("ShaderMaterial_gx1jg")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_0owmy")
+region_rect = Rect2(0, 0, 161, 150)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=287641513]
+position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_gmlin")
 debug_color = Color(0, 0.8328853, 0, 0.41960785)
 
@@ -68,5 +70,7 @@ debug_color = Color(1, 0.31729144, 0.90568215, 0.16470589)
 
 [node name="CollectSFX" type="AudioStreamPlayer2D" parent="." unique_id=622275291]
 stream = SubResource("AudioStreamRandomizer_fcs02")
+
+[node name="AttackComponent" parent="." unique_id=1963452436 instance=ExtResource("6_qek5x")]
 
 [connection signal="body_entered" from="DNASiphon" to="." method="_on_dna_siphon_body_entered"]

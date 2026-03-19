@@ -1,3 +1,5 @@
 [gd_resource type="StatPool" format=3 uid="uid://sqms50b2qn0a"]
 
 [resource]
+max_value = 20
+value = 20

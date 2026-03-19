@@ -4,14 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://drgxl6pxorwqa" path="res://scenes/enemy/t_cells/T1.png" id="2_b3yc5"]
 
 [node name="TCell_1" unique_id=2119407830 instance=ExtResource("1_4cin6")]
-scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" parent="." index="0" unique_id=1494801482]
-scale = Vector2(1, 1)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_b3yc5")
-
-[node name="CollisionShape2D" parent="." index="1" unique_id=1042461258]
-visible = true
-
-[node name="DamageShape" parent="DamageArea" parent_id_path=PackedInt32Array(1499775764) index="0" unique_id=2028847096]
-visible = true

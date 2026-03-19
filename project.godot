@@ -20,6 +20,7 @@ config/icon="res://icon.png"
 ToastX="*uid://3ka1c6fjlv6p"
 TweenFX="*uid://d2n10rw2dnx8o"
 PhantomCameraManager="*uid://duq6jhf6unyis"
+DNA="*uid://nw2ykxh63yo4"
 
 [display]
 
@@ -32,7 +33,7 @@ window/stretch/aspect="keep_width"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Gedis/plugin.cfg", "res://addons/GedisQueue/plugin.cfg", "res://addons/TweenFX/plugin.cfg", "res://addons/health_bar_x/plugin.cfg", "res://addons/icon_widget/plugin.cfg", "res://addons/indie_game_components/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/toastx/plugin.cfg")
+enabled=PackedStringArray("res://addons/Gedis/plugin.cfg", "res://addons/GedisQueue/plugin.cfg", "res://addons/TweenFX/plugin.cfg", "res://addons/health_bar_x/plugin.cfg", "res://addons/icon_widget/plugin.cfg", "res://addons/indie_game_components/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/shader_library/plugin.cfg", "res://addons/toastx/plugin.cfg")
 
 [global_group]
 
@@ -140,3 +141,7 @@ renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_environment="res://default_env.tres"
+
+[shader_library]
+
+internal/previous_shaders_folder="res://shaders/shaderlib/"
