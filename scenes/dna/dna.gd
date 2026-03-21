@@ -19,7 +19,7 @@ var collection_time_elapsed: float = 1.0
 
 func _ready() -> void:
 	sprite.texture = sprites.pick_random()
-	## TODO Randomize sprite on spawn
+	TweenFX.glow_pulse(sprite,2.1,0.2,0.1)
 
 
 func get_random_direction_2d() -> Vector2:
@@ -30,10 +30,6 @@ func get_random_direction_2d() -> Vector2:
 	# Rotate the base direction by the random angle
 	var random_direction := base_direction.rotated(random_angle)
 	return random_direction
-
-
-func _process(delta: float) -> void:
-	sprite.rotate(0.05)
 
 
 func _physics_process(delta: float) -> void:

@@ -1,23 +1,22 @@
 [gd_scene format=3 uid="uid://kojrcu6sef68"]
 
 [ext_resource type="Texture2D" uid="uid://cms6tsihuoaon" path="res://scenes/game_scene/levels/BG.png" id="1_0e2qu"]
-[ext_resource type="PackedScene" uid="uid://clxqc1vdcnnui" path="res://scenes/dna/dna.tscn" id="1_i7qv5"]
+[ext_resource type="Script" uid="uid://bxvsu6hdbv0u8" path="res://scenes/game_scene/levels/stage.gd" id="1_fukny"]
+[ext_resource type="Script" uid="uid://kme3cyyfqprv" path="res://scenes/dna/dna_pickup_root.gd" id="2_effch"]
 [ext_resource type="PackedScene" uid="uid://bfi0q51set0hr" path="res://scenes/player/player.tscn" id="2_ggu3y"]
 [ext_resource type="PackedScene" uid="uid://b2ihdqqi3bfvl" path="res://scenes/ui/gameplay_ui.tscn" id="3_ggu3y"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_dgsc6"]
+[ext_resource type="PackedScene" uid="uid://bc5p07dln7ji1" path="res://scenes/enemy/enemy_spawn_location.tscn" id="8_effch"]
 [ext_resource type="Script" uid="uid://dha0jx3poh0ft" path="res://scenes/game_scene/levels/spawn_component.gd" id="8_qb51w"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_effch"]
 [ext_resource type="PackedScene" uid="uid://vrcprlyh2e5e" path="res://scenes/enemy/t_cells/t_cell_1.tscn" id="9_hovcq"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_m7ppb"]
 [ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="11_fukny"]
-[ext_resource type="Script" uid="uid://bmlwpkrav3q56" path="res://addons/maaacks_game_template/extras/scripts/win_lose_manager.gd" id="11_m7ppb"]
-[ext_resource type="PackedScene" uid="uid://ba11po12cvait" path="res://scenes/windows/game_won_window.tscn" id="12_fukny"]
-[ext_resource type="PackedScene" uid="uid://bx7s80d8smic4" path="res://scenes/windows/level_lost_window.tscn" id="13_ix8bu"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_0e2qu"]
-vertices = PackedVector2Array(-919.77344, -754.3125, -868.8672, -902, -655.40625, -883.9219, -895.7422, -444.9375, -121.6875, -887.8281, -40.71875, -916.8906, 886.8281, -898.40625, 906, -854.3281, 906, 862.8203, 871.5625, 894.0703, -848.1797, 904.9375, -373.29688, -865.4297, -236.96875, -911.8828, -928, 862.9375, -928, 723.71875, -883.8672, 43.03125, -926.5781, -296.6875, -472.6797, -894.71875)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9, 10), PackedInt32Array(11, 12, 4, 10, 13, 14, 15), PackedInt32Array(11, 15, 16, 3, 2, 17)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-960, -960, 960, -960, 960, 960, -960, 960)])
+vertices = PackedVector2Array(930.5469, -880.1797, 960, 32.40625, 960, 910.8672, 886.3125, 960, -796.0781, 960, -896, 935.02344, -896, -700.8281, -866.52344, -848.21094, -850.4922, -864.2422, 914.96875, -895.7578)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-960, -960, 960, -960, 1024, 1024, -960, 1024)])
 parsed_collision_mask = 4294966784
 agent_radius = 32.0
 
@@ -32,8 +31,13 @@ script = ExtResource("11_fukny")
 metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 
 [node name="Stage" type="Node2D" unique_id=1128801347]
+script = ExtResource("1_fukny")
+
+[node name="DnaPickupRoot" type="Node2D" parent="." unique_id=982028405]
+script = ExtResource("2_effch")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=747708767]
+position = Vector2(960, 960)
 navigation_polygon = SubResource("NavigationPolygon_0e2qu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D" unique_id=379697382]
@@ -46,12 +50,13 @@ polygon = PackedVector2Array(-894, -919, -784, -924, -655, -909, -466, -926, -37
 one_way_collision = true
 
 [node name="SpawnArea" type="Area2D" parent="NavigationRegion2D" unique_id=361481995]
+position = Vector2(32, 32)
 collision_layer = 256
 collision_mask = 256
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/SpawnArea" unique_id=1721160685]
 visible = false
-polygon = PackedVector2Array(-894, -919, -784, -924, -655, -909, -466, -926, -374, -904, -238, -936, -129, -921, -37, -943, 82, -924, 163, -935, 243, -925, 320, -941, 408, -930, 472, -942, 548, -931, 688, -937, 822, -931, 897, -940, 939, -915, 927, -875, 935, -803, 950, -711, 933, -661, 945, -597, 936, -532, 933, -389, 910, -285, 947, -176, 915, -45, 921, 85, 934, 146, 909, 234, 921, 322, 906, 429, 936, 528, 928, 578, 943, 624, 936, 684, 920, 741, 936, 801, 933, 883, 868, 930, 782, 917, 628, 946, 524, 920, 366, 941, 241, 926, 109, 945, 39, 924, -118, 933, -215, 950, -303, 922, -398, 912, -493, 925, -571, 923, -673, 941, -757, 926, -834, 944, -913, 920, -945, 888, -950, 779, -927, 683, -942, 569, -920, 494, -935, 415, -917, 339, -931, 273, -905, 35, -948, -103, -950, -203, -936, -251, -940, -342, -915, -438, -935, -554, -915, -616, -933, -781, -905, -860)
+polygon = PackedVector2Array(-864, -896, 864, -928, 896, 896, -896, 896)
 
 [node name="NavigationBounds" type="StaticBody2D" parent="NavigationRegion2D" unique_id=341879528]
 collision_layer = 512
@@ -61,11 +66,12 @@ collision_mask = 0
 visible = false
 position = Vector2(-9.1552734e-05, -9.1552734e-05)
 scale = Vector2(102.39999, 102.39999)
-polygon = PackedVector2Array(-9.296876, -7.41211, -8.701173, -9.140626, -6.396485, -8.945313, -4.580078, -9.052735, -3.6523435, -8.779298, -2.333984, -9.228517, -1.2109368, -8.994142, -0.44921795, -9.267579, 8.86719, -9.082032, 9.160159, -8.408204, 9.160159, 8.564456, 8.632815, 9.042972, -8.359376, 9.1503935, -9.472657, 8.564456, -8.945313, 0.42968848, -9.365235, -2.9101558, -9.062501, -4.3652344, -9.296876, -7.382813, -10.205079, -7.041016, -10.732423, 10.42969, -8.779298, 10.878909, 10.107425, 10.908206, 10.9472685, 9.062503, 11.2793, -6.2304688, 10.644534, -9.345704, 8.9941435, -10.712892, -2.4316401, -10.800782, -9.589845, -9.931642, -10.195313, -7.070313, -9.619142, -7.2851567)
+polygon = PackedVector2Array(-9.062501, -6.8750005, -8.750001, -8.437501, -8.437501, -8.750001, 9.062503, -9.062501, 9.687503, -8.437501, 9.687503, 9.062503, 8.750003, 9.687503, -7.812501, 9.687503, -9.062501, 9.375003, -9.062501, -5.9375, -9.062501, -6.8750005, -10.937501, -6.8750005, -10.732423, 10.42969, -8.779298, 10.878909, 10.107425, 10.908206, 10.9472685, 9.062503, 11.2793, -6.2304688, 10.644534, -9.345704, 8.9941435, -10.712892, -2.4316401, -10.800782, -9.589845, -9.931642, -10.937501, -7.1875005)
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1153422835]
 z_index = -5
 texture = ExtResource("1_0e2qu")
+centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1985399792]
 layer = 2
@@ -74,33 +80,36 @@ layer = 2
 
 [node name="Player" parent="." unique_id=1910550159 instance=ExtResource("2_ggu3y")]
 unique_name_in_owner = true
+position = Vector2(1024, 1024)
 
 [node name="SpawnComponent" type="Node2D" parent="." unique_id=737466401 node_paths=PackedStringArray("spawn_area") groups=["spawn_component"]]
+position = Vector2(1024, 1024)
 script = ExtResource("8_qb51w")
 spawn_area = NodePath("../NavigationRegion2D/SpawnArea")
 enabled = false
 enemy_scene = ExtResource("9_hovcq")
-enemy_to_spawn = 3
-enemy_spawn_frequency = 1
-dna_scene = ExtResource("1_i7qv5")
+enemy_to_spawn = 4
+
+[node name="EnemySpawnLocation" parent="SpawnComponent" unique_id=1426906986 instance=ExtResource("8_effch")]
+position = Vector2(-768, -768)
 
 [node name="CameraLimitZone" type="Area2D" parent="." unique_id=304757325]
+position = Vector2(992, 992)
 collision_layer = 1024
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraLimitZone" unique_id=1644512130]
-visible = false
 shape = SubResource("RectangleShape2D_0e2qu")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1701545518]
 physics_interpolation_mode = 1
-top_level = true
-offset = Vector2(-0.119954124, 0.18405735)
+position = Vector2(1024, 1024)
+offset = Vector2(-2.5945582, 0.39607817)
 zoom = Vector2(1.3, 1.3)
-limit_left = -960
-limit_top = -960
-limit_right = 960
-limit_bottom = 960
+limit_left = 32
+limit_top = 32
+limit_right = 1952
+limit_bottom = 1952
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=324828937]
@@ -110,6 +119,7 @@ script = ExtResource("8_dgsc6")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." unique_id=589726765 node_paths=PackedStringArray("follow_target") groups=["stage_camera"]]
 top_level = true
+position = Vector2(1024, 1024)
 script = ExtResource("9_effch")
 follow_mode = 5
 follow_target = NodePath("../Player")
@@ -120,14 +130,4 @@ draw_limits = true
 limit_target = NodePath("../CameraLimitZone/CollisionShape2D")
 noise = SubResource("Resource_t70pv")
 
-[node name="DNA" type="Node2D" parent="." unique_id=982028405 groups=["dna_node_parent"]]
-
-[node name="WinLoseManager" type="Node" parent="." unique_id=1187384464]
-unique_name_in_owner = true
-script = ExtResource("11_m7ppb")
-main_menu_scene_path = "uid://dhr7kwfkmlq7o"
-game_won_scene = ExtResource("12_fukny")
-game_lost_scene = ExtResource("13_ix8bu")
-
-[node name="DNA2" parent="." unique_id=671490013 instance=ExtResource("1_i7qv5")]
-position = Vector2(119, 210)
+[connection signal="player_died" from="Player" to="." method="_on_player_died"]

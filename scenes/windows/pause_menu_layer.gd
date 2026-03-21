@@ -4,6 +4,7 @@ extends CanvasLayer
 
 func _on_pause_menu_hidden():
 	hide()
+	SignalBus.game_unpaused.emit()
 
 func _on_visibility_changed():
 	if visible:

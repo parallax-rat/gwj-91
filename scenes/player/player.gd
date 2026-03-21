@@ -1,6 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
+signal player_died
+
+@onready var level: Node2D = get_parent()
 @onready var dna_siphon: Area2D = $DNASiphon
 @onready var collect_sfx: AudioStreamPlayer2D = $CollectSFX
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -77,4 +80,4 @@ func _on_movement_component_direction_changed(new_direction: Vector2) -> void:
 func _on_health_depleted(_health) -> void:
 	CLog.c(Color.RED,"Player died")
 	await TweenFX.stop_all(sprite_2d)
-	%WinLoseManager.game_lost()
+	player_died.emit()

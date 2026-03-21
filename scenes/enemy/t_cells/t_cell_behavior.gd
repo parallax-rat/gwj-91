@@ -25,7 +25,7 @@ func take_damage(amount:int) -> void:
 
 
 func _on_depleted(_stat:StatPool) -> void:
-	await dna_spawner.spawn_dna(sprite_2d.global_position)
+	await dna_spawner.spawn_dna(1)
 	await TweenFX.stop_all(sprite_2d)
 	queue_free()
 

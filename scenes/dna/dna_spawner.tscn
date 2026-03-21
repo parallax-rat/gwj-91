@@ -8,46 +8,13 @@ script = ExtResource("1_peemq")
 [node name="SpawnLocations" type="Node2D" parent="." unique_id=1629315819]
 
 [node name="Marker2D" type="Marker2D" parent="SpawnLocations" unique_id=678974055 groups=["dna_spawn_location"]]
-position = Vector2(-9, -11)
+position = Vector2(0, -5)
 
 [node name="Marker2D2" type="Marker2D" parent="SpawnLocations" unique_id=1852147994 groups=["dna_spawn_location"]]
-position = Vector2(0, -17)
+position = Vector2(0, 5)
 
 [node name="Marker2D3" type="Marker2D" parent="SpawnLocations" unique_id=1736399132 groups=["dna_spawn_location"]]
-position = Vector2(21, -9)
+position = Vector2(-5, 0)
 
 [node name="Marker2D4" type="Marker2D" parent="SpawnLocations" unique_id=1792675489 groups=["dna_spawn_location"]]
-position = Vector2(5, 19)
-
-[node name="Marker2D5" type="Marker2D" parent="SpawnLocations" unique_id=231665448 groups=["dna_spawn_location"]]
-position = Vector2(-23, 9)
-
-[node name="Marker2D6" type="Marker2D" parent="SpawnLocations" unique_id=48605804 groups=["dna_spawn_location"]]
-position = Vector2(16, -2)
-
-[node name="Marker2D7" type="Marker2D" parent="SpawnLocations" unique_id=2070545821 groups=["dna_spawn_location"]]
-position = Vector2(-11, 19)
-
-[node name="Marker2D8" type="Marker2D" parent="SpawnLocations" unique_id=1404377686 groups=["dna_spawn_location"]]
-position = Vector2(10, 6)
-
-[node name="Marker2D9" type="Marker2D" parent="SpawnLocations" unique_id=1715815622 groups=["dna_spawn_location"]]
-position = Vector2(-17, -4)
-
-[node name="Marker2D10" type="Marker2D" parent="SpawnLocations" unique_id=111462521 groups=["dna_spawn_location"]]
-position = Vector2(22, 5)
-
-[node name="Marker2D11" type="Marker2D" parent="SpawnLocations" unique_id=1837410517 groups=["dna_spawn_location"]]
-position = Vector2(9, -14)
-
-[node name="Marker2D12" type="Marker2D" parent="SpawnLocations" unique_id=977972072 groups=["dna_spawn_location"]]
-position = Vector2(-3, 16)
-
-[node name="Marker2D13" type="Marker2D" parent="SpawnLocations" unique_id=1302659938 groups=["dna_spawn_location"]]
-position = Vector2(3, -1)
-
-[node name="Marker2D14" type="Marker2D" parent="SpawnLocations" unique_id=654165417 groups=["dna_spawn_location"]]
-position = Vector2(-8, 3)
-
-[node name="Marker2D15" type="Marker2D" parent="SpawnLocations" unique_id=2063055718 groups=["dna_spawn_location"]]
-position = Vector2(16, 13)
+position = Vector2(5, 0)

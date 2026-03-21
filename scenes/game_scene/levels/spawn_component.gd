@@ -15,10 +15,7 @@ extends Node2D
 @export var enemy_scene: PackedScene
 @export var enemy_to_spawn: int
 @export var enemy_spawn_frequency: int = 5
-@export_category("DNAPickup")
-@export var dna_scene: PackedScene
-@export var min_dna_to_spawn: int = 1
-@export var max_dna_to_spawn: int = 3
+
 
 var time_tick = TimeTick.new()
 var spawned_count:int = 0
@@ -28,15 +25,7 @@ func _ready() -> void:
 	rng.randomize()
 	time_tick.initialize()
 	time_tick.connect("tick_updated", _on_tick_updated)
-
-
-func spawn_dna_on_death(pos:Vector2) -> void:
-	var dna_drop_quantity = rng.randi_range(min_dna_to_spawn,max_dna_to_spawn)
-	for i in dna_drop_quantity:
-		var new_dna = dna_scene.instantiate()
-		add_child(new_dna)
-		new_dna.global_position = pos
-		new_dna.random_spawn()
+	spawn_enemy(enemy_to_spawn)
 
 
 func get_random_direction_2d() -> Vector2:
@@ -52,23 +41,28 @@ func get_random_direction_2d() -> Vector2:
 
 func _on_tick_updated(current_tick:int) -> void:
 	if current_tick >= enemy_spawn_frequency:
-		spawn_enemy()
+		spawn_enemy(enemy_to_spawn)
 		time_tick.reset()
 
 
-func spawn_enemy() -> void:
-	spawned_count += 1
-	for enemy in enemy_to_spawn:
-		var offscreen_location = get_random_offscreen_position(spawn_area)
-		if offscreen_location == null:
-			continue
+func spawn_enemy(amount:int) -> void:
+	for enemy in amount:
+		var spawn_location = get_random_offscreen_position(spawn_area)
 		var new_enemy = enemy_scene.instantiate()
-		new_enemy.name = "Enemy " + str(spawned_count)
 		add_child(new_enemy)
-		new_enemy.global_position = offscreen_location
+		new_enemy.global_position = spawn_location
 
 
-func get_random_offscreen_position(target_area: Area2D, margin: float = 100.0, max_attempts: int = 24):
+func get_hidden_spawn_location() -> EnemySpawnLocation:
+	var spawn_locations = get_tree().get_nodes_in_group("enemy_spawn_location")
+	for location in spawn_locations.size():
+		var enemy_spawn_location = spawn_locations.pick_random()
+		if enemy_spawn_location.get_visible() == false:
+			return enemy_spawn_location
+	return spawn_locations.pick_random()
+
+
+func get_random_offscreen_position(target_area: Area2D, margin: float = 200.0, max_attempts: int = 24):
 	var viewport_size = get_viewport_rect().size / camera.zoom
 	
 	var center = camera.global_position

@@ -13,6 +13,7 @@ config_version=5
 config/name="GWJ 91"
 run/main_scene="uid://ohxpkfy8oudh"
 config/features=PackedStringArray("4.6")
+run/max_fps=120
 config/icon="res://icon.png"
 
 [autoload]
@@ -21,6 +22,7 @@ ToastX="*uid://3ka1c6fjlv6p"
 TweenFX="*uid://d2n10rw2dnx8o"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 SignalBus="*uid://l5cf15fgq7fr"
+Constant="*uid://d1tu38mapyixx"
 
 [display]
 
@@ -45,6 +47,7 @@ spawn_component=""
 enemy=""
 dna_spawn_location=""
 dna_node_parent=""
+enemy_spawn_location=""
 
 [gui]
 

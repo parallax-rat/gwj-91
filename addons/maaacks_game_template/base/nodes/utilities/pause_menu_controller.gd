@@ -3,8 +3,8 @@ extends Node
 ## Node for opening a pause menu when detecting a 'ui_cancel' event.
 
 @export var pause_menu_packed : PackedScene
-@export var focused_viewport : Viewport
 
+var focused_viewport : Viewport
 var pause_menu : Node
 
 func _unhandled_input(event : InputEvent) -> void:
@@ -14,6 +14,7 @@ func _unhandled_input(event : InputEvent) -> void:
 			focused_viewport = get_viewport()
 		var _initial_focus_control = focused_viewport.gui_get_focus_owner()
 		pause_menu.show()
+		SignalBus.game_paused.emit()
 		if pause_menu is CanvasLayer:
 			await pause_menu.visibility_changed
 		else:
@@ -22,6 +23,8 @@ func _unhandled_input(event : InputEvent) -> void:
 			_initial_focus_control.grab_focus()
 
 func _ready() -> void:
+	focused_viewport = get_parent().get_viewport()
 	pause_menu = pause_menu_packed.instantiate()
+	Constant.pause_menu = pause_menu
 	pause_menu.hide()
 	get_tree().current_scene.call_deferred("add_child", pause_menu)

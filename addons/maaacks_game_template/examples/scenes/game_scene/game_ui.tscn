@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bve6co8x25of" path="res://addons/maaacks_game_template/examples/scenes/windows/game_won_window.tscn" id="6_a40ke"]
 [ext_resource type="PackedScene" uid="uid://whpmo2tt4mwr" path="res://addons/maaacks_game_template/examples/scenes/windows/level_lost_window.tscn" id="7_sgprk"]
 [ext_resource type="PackedScene" uid="uid://cns5v1sn14qht" path="res://addons/maaacks_game_template/examples/scenes/windows/level_won_window.tscn" id="8_up6yb"]
-[ext_resource type="Script" uid="uid://wjq7li836lwj" path="res://addons/maaacks_game_template/extras/scripts/scene_lister.gd" id="9_a40ke"]
 [ext_resource type="Script" uid="uid://tooek7mdq54x" path="res://addons/maaacks_game_template/examples/scenes/game_scene/configurable_sub_viewport.gd" id="9_u1dsg"]
 
 [node name="GameUI" type="Control" unique_id=891185552]
@@ -27,21 +26,15 @@ focused_viewport = NodePath("../ViewportContainer/ConfigurableSubViewport")
 script = ExtResource("5_a40ke")
 level_container = NodePath("../ViewportContainer/ConfigurableSubViewport")
 
-[node name="LevelManager" type="Node" parent="." unique_id=2075439962 node_paths=PackedStringArray("level_loader", "scene_lister")]
+[node name="LevelManager" type="Node" parent="." unique_id=2075439962 node_paths=PackedStringArray("level_loader")]
 script = ExtResource("4_vcq5n")
 level_loader = NodePath("../LevelLoader")
 starting_level_path = "res://addons/maaacks_game_template/examples/scenes/game_scene/levels/level_1.tscn"
-scene_lister = NodePath("SceneLister")
 main_menu_scene_path = "res://addons/maaacks_game_template/examples/scenes/menus/main_menu/main_menu_with_animations.tscn"
 ending_scene_path = "res://addons/maaacks_game_template/examples/scenes/end_credits/end_credits.tscn"
 game_won_scene = ExtResource("6_a40ke")
 level_lost_scene = ExtResource("7_sgprk")
 level_won_scene = ExtResource("8_up6yb")
-
-[node name="SceneLister" type="Node" parent="LevelManager" unique_id=235998172]
-script = ExtResource("9_a40ke")
-files = Array[String](["res://addons/maaacks_game_template/examples/scenes/game_scene/levels/level_1.tscn", "res://addons/maaacks_game_template/examples/scenes/game_scene/levels/level_2.tscn", "res://addons/maaacks_game_template/examples/scenes/game_scene/levels/level_3.tscn"])
-directory = "res://addons/maaacks_game_template/examples/scenes/game_scene/levels"
 
 [node name="ViewportContainer" type="SubViewportContainer" parent="." unique_id=291449189]
 layout_mode = 1
@@ -56,6 +49,6 @@ stretch = true
 handle_input_locally = false
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
-size = Vector2i(1280, 720)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 script = ExtResource("9_u1dsg")

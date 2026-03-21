@@ -40,4 +40,5 @@ static func _on_tween_finished(node, anim: TweenFX.Animations) -> void:
 		_active.erase(node)
 
 static func _on_node_exiting(node) -> void:
+	stop_all(node)
 	_active.erase(node)

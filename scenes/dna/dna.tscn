@@ -2,36 +2,120 @@
 
 [ext_resource type="Script" uid="uid://bmv8ad07efyyh" path="res://scenes/dna/dna.gd" id="1_om8ne"]
 [ext_resource type="Shader" uid="uid://dr8jwnnc1up7e" path="res://shaders/shaderlib/dynamic_drop_shadow_canvasitem_no_colorrect_needed.gdshader" id="2_g8yjs"]
-[ext_resource type="Texture2D" uid="uid://c10shqv51qu71" path="res://scenes/dna/no_shadows/DNAFrag1.png" id="2_vhmhg"]
-[ext_resource type="Texture2D" uid="uid://brfemudooij06" path="res://scenes/dna/no_shadows/DNAFrag2.png" id="3_5c381"]
 [ext_resource type="Texture2D" uid="uid://ya4gvp0fmx56" path="res://scenes/dna/no_shadows/DNAFrag3.png" id="4_30l7v"]
-[ext_resource type="Texture2D" uid="uid://cmucjikq10cny" path="res://scenes/dna/no_shadows/DNAFrag4.png" id="5_aj2wh"]
-[ext_resource type="Texture2D" uid="uid://cyukfuxqpo3nu" path="res://scenes/dna/no_shadows/DNAFrag5.png" id="6_hubb5"]
-[ext_resource type="Texture2D" uid="uid://mffi4bviw35o" path="res://scenes/dna/no_shadows/DNAFrag6.png" id="7_2w0wf"]
 [ext_resource type="Texture2D" uid="uid://uu0520xtrl3e" path="res://scenes/dna/no_shadows/DNAFrag7.png" id="8_uq8sb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hnfe7"]
 shader = ExtResource("2_g8yjs")
-shader_parameter/dist = 30
-shader_parameter/color = Color(0, 0, 0, 0.35686275)
-shader_parameter/angle = 75.0000035625
+shader_parameter/dist = 2
+shader_parameter/color = Color(0, 0, 0, 0.5)
+shader_parameter/angle = 90.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yt7vt"]
-radius = 8.0
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_ffdmd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0006326821]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/dist")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vhmhg"]
+resource_name = "idle_rotate"
+length = 4.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0006326821, 6.283185307179586]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/dist")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [2, 15, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5c381"]
+_data = {
+&"RESET": SubResource("Animation_ffdmd"),
+&"idle_rotate": SubResource("Animation_vhmhg")
+}
 
 [node name="DNA" type="CharacterBody2D" unique_id=671490013]
 collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_om8ne")
-sprites = Array[Texture2D]([ExtResource("2_vhmhg"), ExtResource("3_5c381"), ExtResource("4_30l7v"), ExtResource("5_aj2wh"), ExtResource("6_hubb5"), ExtResource("7_2w0wf"), ExtResource("8_uq8sb")])
+sprites = Array[Texture2D]([ExtResource("4_30l7v"), ExtResource("8_uq8sb")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2108022924]
 material = SubResource("ShaderMaterial_hnfe7")
 rotation = 0.0006326821
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_uq8sb")
+texture = ExtResource("4_30l7v")
 region_rect = Rect2(36, 40, 46, 46)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=955650286]
 shape = SubResource("CircleShape2D_yt7vt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1343671686]
+libraries/ = SubResource("AnimationLibrary_5c381")

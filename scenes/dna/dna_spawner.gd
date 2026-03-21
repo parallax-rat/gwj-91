@@ -3,25 +3,21 @@ extends Node2D
 
 const DNA = preload("uid://clxqc1vdcnnui")
 
-var spawn_min: int = 0
-var spawn_max: int = 3
+@onready var spawn_locations: Node2D = $SpawnLocations
+
+
 var dna_parent: Node2D
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+
 func _ready() -> void:
 	rng.randomize()
-	dna_parent = get_tree().get_first_node_in_group("dna_node_parent")
 
 
-func get_random_spawn_location() -> Vector2:
-	var locations = get_tree().get_nodes_in_group("dna_spawn_location")
-	return locations.pick_random().global_position
-
-
-func spawn_dna(_location) -> void:
-	var amount = rng.randi_range(1,100)
-	if amount < 65:
-		return
-	var dna: DNAPickup = DNA.instantiate()
-	dna_parent.call_deferred("add_child",dna)
-	dna.global_position = _location
+func spawn_dna(enemy_amount:int = 1) -> void:
+	var amount = rng.randi_range(0,enemy_amount) # 50% chance to drop 1 dna. Enemy can provide a higher threshold
+	for i in amount:
+		var dna = DNA.instantiate()
+		Constant.dna_root.call_deferred("add_child",dna)
+		var spawn_marker = spawn_locations.get_children().pick_random()
+		dna.global_position = spawn_marker.global_position
