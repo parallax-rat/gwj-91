@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cthktl4ftweg1"]
+
+[ext_resource type="Script" uid="uid://fu5m5bc1rxgm" path="res://scenes/enemy/t_cells/enemy_attack_component.gd" id="1_v721a"]
+[ext_resource type="AudioStream" uid="uid://dtgcuwrx1gk73" path="res://scenes/enemy/t_cells/audio/hit.wav" id="2_tav0i"]
+[ext_resource type="AudioStream" uid="uid://cvx4x7mucrdxg" path="res://scenes/enemy/t_cells/audio/hit2.wav" id="3_dyykt"]
+[ext_resource type="AudioStream" uid="uid://ctpc3nuvm07ly" path="res://scenes/enemy/t_cells/audio/hit3.wav" id="4_wafbh"]
+[ext_resource type="AudioStream" uid="uid://c478r8qxtwdio" path="res://scenes/enemy/t_cells/audio/hit4.wav" id="5_7pg4k"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1tt4h"]
+streams_count = 4
+stream_0/stream = ExtResource("2_tav0i")
+stream_1/stream = ExtResource("3_dyykt")
+stream_2/stream = ExtResource("4_wafbh")
+stream_3/stream = ExtResource("5_7pg4k")
+
+[node name="EnemyAttackComponent" type="Node2D" unique_id=340662538 node_paths=PackedStringArray("cooldown_timer", "attack_sfx")]
+script = ExtResource("1_v721a")
+cooldown_timer = NodePath("Cooldown")
+attack_sfx = NodePath("AttackSFX")
+
+[node name="Cooldown" type="Timer" parent="." unique_id=2025203708]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="AttackSFX" type="AudioStreamPlayer2D" parent="." unique_id=2048837146]
+stream = SubResource("AudioStreamRandomizer_1tt4h")

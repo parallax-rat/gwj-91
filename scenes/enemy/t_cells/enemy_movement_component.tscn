@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c5pkkfq6y2vw5"]
+
+[ext_resource type="Script" uid="uid://3vhllk6rc7e1" path="res://scenes/enemy/t_cells/enemy_movement_component.gd" id="1_cu4sv"]
+
+[node name="EnemyMovementComponent" type="Node2D" unique_id=843096178 node_paths=PackedStringArray("navigation_agent_2d")]
+script = ExtResource("1_cu4sv")
+player_group_name = "player"
+navigation_agent_2d = NodePath("NavigationAgent2D")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1493250990]
+avoidance_enabled = true
+radius = 32.0

@@ -1,22 +1,23 @@
 [gd_scene format=3 uid="uid://cb7pty3hi22o6"]
 
 [ext_resource type="Script" uid="uid://bba2hijp37why" path="res://scenes/player/attacks/attack_component.gd" id="1_vwk26"]
-[ext_resource type="Script" uid="uid://dx57g43du5dum" path="res://scenes/player/evolutions/evolution.gd" id="2_ojet8"]
 [ext_resource type="Texture2D" uid="uid://ddg3ir8quehpo" path="res://scenes/player/attacks/projetilNew.png" id="2_vjlke"]
-[ext_resource type="Script" uid="uid://b0c48ejlnpdqy" path="res://addons/health_bar_x/runtime/health_bar_x_2d.gd" id="3_f2uml"]
-[ext_resource type="Script" uid="uid://be5ij7yubf56i" path="res://addons/health_bar_x/runtime/health_bar_x_style.gd" id="4_ytymj"]
+[ext_resource type="Texture2D" uid="uid://c8kh5kkg5a3qe" path="res://scenes/player/attacks/tendril_smash/frame0000.png" id="4_ohubi"]
+[ext_resource type="Texture2D" uid="uid://cx516dchuv57e" path="res://scenes/player/attacks/tendril_smash/frame0001.png" id="5_8xe47"]
 [ext_resource type="AudioStream" uid="uid://fnerc0kdpovb" path="res://scenes/player/attacks/basic/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-001.wav" id="5_pesfu"]
+[ext_resource type="Texture2D" uid="uid://cue4xykdsh5ph" path="res://scenes/player/attacks/tendril_smash/frame0002.png" id="6_kq1ta"]
 [ext_resource type="AudioStream" uid="uid://dfhxyasa61u0p" path="res://scenes/player/attacks/basic/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-003.wav" id="6_ojet8"]
+[ext_resource type="Texture2D" uid="uid://bsmqg30s0mt4c" path="res://scenes/player/attacks/tendril_smash/frame0003.png" id="7_4t1ks"]
 [ext_resource type="AudioStream" uid="uid://cdyfx0hn0vs6f" path="res://scenes/player/attacks/basic/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-005.wav" id="7_yvopo"]
+[ext_resource type="Texture2D" uid="uid://du3irbm67w7iv" path="res://scenes/player/attacks/tendril_smash/frame0004.png" id="8_0aq6v"]
 [ext_resource type="AudioStream" uid="uid://cp3g5ue5gkemv" path="res://scenes/player/attacks/basic/DSGNMisc_MOVEMENT-Zap Noise Sweep_HY_PC-006.wav" id="8_apw2i"]
-
-[sub_resource type="Resource" id="Resource_yvopo"]
-script = ExtResource("2_ojet8")
-type = 0
-metadata/_custom_type_script = "uid://dx57g43du5dum"
+[ext_resource type="Texture2D" uid="uid://dg04rys1ff6cc" path="res://scenes/player/attacks/tendril_smash/frame0005.png" id="9_2twoe"]
+[ext_resource type="Texture2D" uid="uid://bjwyrlin2us2m" path="res://scenes/player/attacks/tendril_smash/frame0006.png" id="10_7rsqi"]
+[ext_resource type="Texture2D" uid="uid://uhyok365wj2e" path="res://scenes/player/attacks/tendril_smash/frame0007.png" id="11_k1nyo"]
+[ext_resource type="Texture2D" uid="uid://bmwmrim1t3c64" path="res://scenes/player/attacks/tendril_smash/frame0008.png" id="12_rrjbp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qek5x"]
-radius = 160.0
+radius = 128.50098
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojet8"]
 atlas = ExtResource("2_vjlke")
@@ -76,15 +77,72 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ohubi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8xe47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kq1ta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4t1ks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0aq6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2twoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_7rsqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_k1nyo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rrjbp")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"tendril_smash",
+"speed": 30.0
 }]
 
-[sub_resource type="Resource" id="Resource_mxkhp"]
-script = ExtResource("4_ytymj")
-fill_color = Color(1, 1, 1, 1)
-border_enabled = false
-border_thickness = 1
-border_color = Color(0.12368315, 0.1236394, 0.14602149, 1)
-metadata/_custom_type_script = "uid://be5ij7yubf56i"
+[sub_resource type="Animation" id="Animation_8xe47"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v7aku"]
 streams_count = 4
@@ -93,49 +151,78 @@ stream_1/stream = ExtResource("6_ojet8")
 stream_2/stream = ExtResource("7_yvopo")
 stream_3/stream = ExtResource("8_apw2i")
 
-[node name="AttackComponent" type="Node2D" unique_id=1963452436]
-scale = Vector2(0.8, 0.8)
-script = ExtResource("1_vwk26")
-base_range = 160.0
-evolutions = Array[ExtResource("2_ojet8")]([SubResource("Resource_yvopo")])
+[sub_resource type="Animation" id="Animation_ohubi"]
+resource_name = "tendril_smash"
+length = 1.0000033
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666666, 0.10000001, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.40839866),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackSFX")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_v7aku")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
-[node name="AttackRange" type="Area2D" parent="." unique_id=2094870241]
-collision_layer = 0
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8xe47"]
+_data = {
+&"RESET": SubResource("Animation_8xe47"),
+&"tendril_smash": SubResource("Animation_ohubi")
+}
+
+[node name="AttackComponent" type="Area2D" unique_id=2094870241]
+collision_layer = 32
 collision_mask = 4
 input_pickable = false
+script = ExtResource("1_vwk26")
+type = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=1782812022]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1782812022]
 shape = SubResource("CircleShape2D_qek5x")
-debug_color = Color(0.047058824, 0, 0.07058824, 0.41960785)
-
-[node name="Cooldown" type="Timer" parent="." unique_id=41073397]
-process_callback = 0
-one_shot = true
+disabled = true
+debug_color = Color(0.047058824, 0, 0.07058824, 0.8666667)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1801738126]
 modulate = Color(0.8784314, 0.14509805, 0.8745098, 1)
-position = Vector2(0, 1.4305115e-06)
-scale = Vector2(0.78125, 0.93750006)
+position = Vector2(-49, -10)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_yvopo")
-animation = &"attack"
-frame = 7
-frame_progress = 1.0
+animation = &"tendril_smash"
 offset = Vector2(128, 0)
 
-[node name="CooldownBar" type="Node2D" parent="." unique_id=503254739 node_paths=PackedStringArray("follow_target")]
-position = Vector2(-64, -64)
-script = ExtResource("3_f2uml")
-style = SubResource("Resource_mxkhp")
-bar_size = Vector2(32, 8)
-value = 0.0
-max_value = 1.0
-follow_target = NodePath("..")
-follow_offset = Vector2(0, -42)
-metadata/_custom_type_script = "uid://b0c48ejlnpdqy"
-
 [node name="AttackSFX" type="AudioStreamPlayer2D" parent="." unique_id=1942078567]
-stream = SubResource("AudioStreamRandomizer_v7aku")
 
-[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
-[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
-[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=111813254]
+libraries/ = SubResource("AnimationLibrary_8xe47")
+autoplay = &"tendril_smash"

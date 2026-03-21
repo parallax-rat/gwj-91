@@ -62,11 +62,10 @@ func spawn_enemy() -> void:
 		var offscreen_location = get_random_offscreen_position(spawn_area)
 		if offscreen_location == null:
 			continue
-		var new_enemy: Enemy = enemy_scene.instantiate()
+		var new_enemy = enemy_scene.instantiate()
 		new_enemy.name = "Enemy " + str(spawned_count)
 		add_child(new_enemy)
 		new_enemy.global_position = offscreen_location
-		new_enemy._on_spawned_successfully()
 
 
 func get_random_offscreen_position(target_area: Area2D, margin: float = 100.0, max_attempts: int = 24):

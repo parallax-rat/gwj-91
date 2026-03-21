@@ -48,8 +48,7 @@ func take_damage(amount: int) -> void:
 		_on_health_depleted()
 
 
-func _on_health_depleted() -> void:
-	DNA.gedis.publish("DNA",global_position)
+func _on_health_depleted(_unused_value: Variant = null) -> void:
 	get_tree().get_first_node_in_group("spawn_component").spawn_dna_on_death(global_position)
 	death_sfx.play()
 	queue_free()

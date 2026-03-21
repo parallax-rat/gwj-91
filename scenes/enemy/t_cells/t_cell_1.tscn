@@ -1,10 +1,60 @@
 [gd_scene format=3 uid="uid://vrcprlyh2e5e"]
 
-[ext_resource type="PackedScene" uid="uid://001l0b5a1coo" path="res://scenes/enemy/base_enemy.tscn" id="1_4cin6"]
+[ext_resource type="Script" uid="uid://cm7plwtei1j3i" path="res://scenes/enemy/t_cells/t_cell_behavior.gd" id="1_40n36"]
 [ext_resource type="Texture2D" uid="uid://drgxl6pxorwqa" path="res://scenes/enemy/t_cells/T1.png" id="2_b3yc5"]
+[ext_resource type="PackedScene" uid="uid://c5pkkfq6y2vw5" path="res://scenes/enemy/t_cells/enemy_movement_component.tscn" id="6_ak6kx"]
+[ext_resource type="AudioStream" uid="uid://bqyxhpsv7o4os" path="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-002.wav" id="8_b1ax5"]
+[ext_resource type="AudioStream" uid="uid://q7s5rvmsbdj6" path="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-003.wav" id="9_pqfj1"]
+[ext_resource type="AudioStream" uid="uid://05cwam018f3j" path="res://scenes/enemy/t_cells/audio/DSGNMisc_HIT-Gore Pierce_HY_PC-004.wav" id="10_wd458"]
+[ext_resource type="PackedScene" uid="uid://cthktl4ftweg1" path="res://scenes/enemy/t_cells/enemy_attack_component.tscn" id="11_t5i0n"]
 
-[node name="TCell_1" unique_id=2119407830 instance=ExtResource("1_4cin6")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_jf5t1"]
+radius = 38.118237
 
-[node name="Sprite2D" parent="." index="0" unique_id=1494801482]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x8f0n"]
+radius = 38.052597
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vke1u"]
+streams_count = 3
+stream_0/stream = ExtResource("8_b1ax5")
+stream_1/stream = ExtResource("9_pqfj1")
+stream_2/stream = ExtResource("10_wd458")
+
+[node name="TCell_1" type="CharacterBody2D" unique_id=2119407830 groups=["enemy"]]
+collision_layer = 4
+collision_mask = 45
+script = ExtResource("1_40n36")
+starting_health = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1494801482]
+z_index = 1
+y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_b3yc5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1042461258]
+shape = SubResource("CircleShape2D_jf5t1")
+debug_color = Color(0.9647059, 0, 0.16862746, 0.41960785)
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=1499775764]
+collision_layer = 68
+collision_mask = 33
+input_pickable = false
+
+[node name="DamageShape" type="CollisionShape2D" parent="DamageArea" unique_id=2028847096]
+shape = SubResource("CircleShape2D_x8f0n")
+debug_color = Color(0.9999998, 0.0094214985, 0.06508232, 0.41960785)
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=224401569]
+stream = SubResource("AudioStreamRandomizer_vke1u")
+
+[node name="EnemyMovementComponent" parent="." unique_id=843096178 node_paths=PackedStringArray("enemy_node") instance=ExtResource("6_ak6kx")]
+enemy_node = NodePath("..")
+
+[node name="EnemyAttackComponent" parent="." unique_id=340662538 node_paths=PackedStringArray("enemy_node", "sprite_2d", "range") instance=ExtResource("11_t5i0n")]
+enemy_node = NodePath("..")
+sprite_2d = NodePath("../Sprite2D")
+range = NodePath("../DamageArea")
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="area_entered" from="DamageArea" to="." method="_on_damage_area_area_entered"]

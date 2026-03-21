@@ -1,16 +1,11 @@
 class_name AttackComponent
-extends Node2D
+extends Area2D
 
-@onready var attack_area: Area2D = $AttackRange
-@onready var attack_area_shape: CollisionShape2D = $AttackRange/CollisionShape2D
-@onready var cooldown_timer: Timer = $Cooldown
-@onready var player: Player = get_tree().get_first_node_in_group("player")
-@onready var debug_ui: Control = get_tree().get_first_node_in_group("debug_ui")
 @onready var attack_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var cooldown_bar: HealthBarX2D = $CooldownBar
 @onready var attack_sfx: AudioStreamPlayer2D = $AttackSFX
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-
+@export_enum("Contact", "Auto") var type
 ## How wide the attack ring is without any mutations
 @export var base_range: float = 164
 ## How much damage the attack deals without any mutations
@@ -21,68 +16,7 @@ extends Node2D
 @export var base_targets: int = 1
 @export var evolutions: Array[Evolution]
 
+var full_damage: float = base_damage
 
-var enemies_in_range: Array[Enemy] = []
-var target: Enemy = null:
-	set(value):
-		target = value
-var cooldown: bool = false
-
-
-func _ready() -> void:
-	attack_area_shape.shape.radius = base_range
-	CLog.c(Color.YELLOW,"Attack Radius: " + str(attack_area_shape.shape.radius))
-	CLog.c(Color.CADET_BLUE,"Target: " + str(target))
-
-
-func _process(_delta: float) -> void:
-	cooldown_bar.value = cooldown_timer.time_left
-	
-	if cooldown: ## Is the attack on cooldown?
-		return # Do nothing
-	
-	if target: ## Do I have a target?
-		if enemies_in_range.has(target): ## Is that target still in range?
-			attack()
-	
-	if enemies_in_range.size() > 0: ## Are there enemies in range?
-		CLog.c(Color.RED, "Enemies in range: " + str(enemies_in_range))
-		target = enemies_in_range[0] # Set closest as the new target
-		attack()
-		## NOTE ---- If closest enemy not being attacked:
-		## --------- might need to check for distance, and
-		## --------- append to a new array on_body_entered 
-		## --------- instead so the index stays ordered.
-
-
-func attack() -> void:
-	CLog.o("Attack target: ",target)
-	if target == null:
-		return
-	attack_sprite.look_at(target.global_position)
-	attack_sprite.play("attack")
-	target.take_damage(base_damage)
-	cooldown_timer.start()
-	cooldown = true
-	attack_sfx.play()
-
-
-func _on_attack_range_body_entered(body: Node2D) -> void:
-	var new_enemy_target: Enemy = body
-	if new_enemy_target.valid_target == true:
-		enemies_in_range.append(new_enemy_target)
-
-
-func _on_attack_range_body_exited(body: Node2D) -> void:
-	var index = enemies_in_range.find(body)
-	enemies_in_range.remove_at(index)
-
-
-func _on_cooldown_timeout() -> void:
-	CLog.o("Cooldown done")
-	cooldown = false
-
-
-func _on_target_died() -> void:
-	CLog.o("Target killed.")
-	target = null
+func evolve_attack(new_effect:Evolution) -> void:
+	base_damage = base_damage * new_effect.damage_mult_modifier

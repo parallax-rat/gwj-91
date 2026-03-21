@@ -22,7 +22,7 @@ shader_parameter/angle = 249.27201184042
 radius = 37.215588
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lvxji"]
-radius = 100.0
+radius = 70.178345
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fcs02"]
 streams_count = 4
@@ -32,7 +32,7 @@ stream_2/stream = ExtResource("10_gx1jg")
 stream_3/stream = ExtResource("11_ugbui")
 
 [node name="Player" type="CharacterBody2D" unique_id=1910550159 groups=["player"]]
-collision_mask = 72
+collision_mask = 8
 motion_mode = 1
 script = ExtResource("1_lvxji")
 health = ExtResource("2_75vfm")
@@ -42,6 +42,10 @@ dna = ExtResource("3_0owmy")
 script = ExtResource("1_dovo2")
 speed = 350.0
 metadata/_custom_type_script = "uid://dqus7ddco8loo"
+
+[node name="DNAComponent" type="Node" parent="." unique_id=846752431]
+
+[node name="AttackComponent" parent="." unique_id=1963452436 instance=ExtResource("6_qek5x")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=203274411]
 material = SubResource("ShaderMaterial_gx1jg")
@@ -70,7 +74,5 @@ debug_color = Color(1, 0.31729144, 0.90568215, 0.16470589)
 
 [node name="CollectSFX" type="AudioStreamPlayer2D" parent="." unique_id=622275291]
 stream = SubResource("AudioStreamRandomizer_fcs02")
-
-[node name="AttackComponent" parent="." unique_id=1963452436 instance=ExtResource("6_qek5x")]
 
 [connection signal="body_entered" from="DNASiphon" to="." method="_on_dna_siphon_body_entered"]

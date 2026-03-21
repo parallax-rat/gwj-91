@@ -36,4 +36,3 @@ func increase_dna(amount:int) -> void:
 
 func take_damage(amount:int) -> void:
 	health.decrease(amount)
-	TweenFX.blink(sprite_2d,1,4,0,1)
