@@ -6,7 +6,7 @@
 
 static var _active: Dictionary = {}  # { node: { TweenFX.Animations.X: tween } }
 
-static func track(node: CanvasItem, anim: TweenFX.Animations, tween: Tween) -> void:
+static func track(node, anim: TweenFX.Animations, tween: Tween) -> void:
 	if not _active.has(node):
 		_active[node] = {}
 		if not node.tree_exiting.is_connected(_on_node_exiting):
@@ -14,7 +14,7 @@ static func track(node: CanvasItem, anim: TweenFX.Animations, tween: Tween) -> v
 	_active[node][anim] = tween
 	tween.finished.connect(_on_tween_finished.bind(node, anim), CONNECT_ONE_SHOT)
 
-static func stop(node: CanvasItem, anim: TweenFX.Animations) -> void:
+static func stop(node: Node, anim: TweenFX.Animations) -> void:
 	if not _active.has(node) or not _active[node].has(anim):
 		return
 	_active[node][anim].kill()
@@ -22,22 +22,22 @@ static func stop(node: CanvasItem, anim: TweenFX.Animations) -> void:
 	if _active[node].is_empty():
 		_active.erase(node)
 
-static func stop_all(node: CanvasItem) -> void:
+static func stop_all(node) -> void:
 	if not _active.has(node):
 		return
 	for tween in _active[node].values():
 		tween.kill()
 	_active.erase(node)
 
-static func is_playing(node: CanvasItem, anim: TweenFX.Animations) -> bool:
+static func is_playing(node, anim: TweenFX.Animations) -> bool:
 	return _active.has(node) and _active[node].has(anim)
 
-static func _on_tween_finished(node: CanvasItem, anim: TweenFX.Animations) -> void:
+static func _on_tween_finished(node, anim: TweenFX.Animations) -> void:
 	if not _active.has(node):
 		return
 	_active[node].erase(anim)
 	if _active[node].is_empty():
 		_active.erase(node)
 
-static func _on_node_exiting(node: CanvasItem) -> void:
+static func _on_node_exiting(node) -> void:
 	_active.erase(node)

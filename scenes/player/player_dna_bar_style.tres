@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="HealthBarXStyle" format=3 uid="uid://cwloly557xeq5"]
+
+[ext_resource type="Texture2D" uid="uid://cc2mcxp2ivbob" path="res://scenes/dna/DNAFull.png" id="1_g50gr"]
+[ext_resource type="Script" uid="uid://be5ij7yubf56i" path="res://addons/health_bar_x/runtime/health_bar_x_style.gd" id="2_xwgbg"]
+
+[resource]
+script = ExtResource("2_xwgbg")
+background_color = Color(0.2, 0.2, 0.21960784, 0.30588236)
+fill_color = Color(0.19607843, 1, 0.19607843, 0.6313726)
+color_green = Color(0.19607843, 1, 0.19607843, 1)
+border_thickness = 1
+border_color = Color(0.11870941, 0.1846841, 0.13101235, 1)
+font_size = 16
+outline_size = 10
+icon_texture = ExtResource("1_g50gr")
+icon_forced_size = Vector2(64, 64)
+icon_fit_mode = 1
+metadata/_custom_type_script = "uid://be5ij7yubf56i"

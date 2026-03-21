@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bmv8ad07efyyh" path="res://scenes/dna/dna.gd" id="1_om8ne"]
 [ext_resource type="Shader" uid="uid://dr8jwnnc1up7e" path="res://shaders/shaderlib/dynamic_drop_shadow_canvasitem_no_colorrect_needed.gdshader" id="2_g8yjs"]
 [ext_resource type="Texture2D" uid="uid://c10shqv51qu71" path="res://scenes/dna/no_shadows/DNAFrag1.png" id="2_vhmhg"]
-[ext_resource type="Texture2D" uid="uid://dcv2lchqdp883" path="res://scenes/dna/DNAFragment_A.png" id="3_3dg61"]
 [ext_resource type="Texture2D" uid="uid://brfemudooij06" path="res://scenes/dna/no_shadows/DNAFrag2.png" id="3_5c381"]
 [ext_resource type="Texture2D" uid="uid://ya4gvp0fmx56" path="res://scenes/dna/no_shadows/DNAFrag3.png" id="4_30l7v"]
 [ext_resource type="Texture2D" uid="uid://cmucjikq10cny" path="res://scenes/dna/no_shadows/DNAFrag4.png" id="5_aj2wh"]
@@ -31,7 +30,7 @@ sprites = Array[Texture2D]([ExtResource("2_vhmhg"), ExtResource("3_5c381"), ExtR
 material = SubResource("ShaderMaterial_hnfe7")
 rotation = 0.0006326821
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_3dg61")
+texture = ExtResource("8_uq8sb")
 region_rect = Rect2(36, 40, 46, 46)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=955650286]

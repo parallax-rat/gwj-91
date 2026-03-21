@@ -10,6 +10,7 @@ var health: StatPool = StatPool.new()
 
 
 func _ready() -> void:
+	TweenFX.idle_rubber(sprite_2d)
 	health.max_value = starting_health
 	health.value = starting_health
 	health.depleted.connect(_on_depleted)
@@ -25,6 +26,7 @@ func take_damage(amount:int) -> void:
 
 func _on_depleted(_stat:StatPool) -> void:
 	await dna_spawner.spawn_dna(sprite_2d.global_position)
+	await TweenFX.stop_all(sprite_2d)
 	queue_free()
 
 

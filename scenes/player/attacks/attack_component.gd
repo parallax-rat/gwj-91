@@ -18,5 +18,13 @@ extends Area2D
 
 var full_damage: float = base_damage
 
+
 func evolve_attack(new_effect:Evolution) -> void:
 	base_damage = base_damage * new_effect.damage_mult_modifier
+
+
+func _on_movement_component_direction_changed(new_direction: Vector2) -> void:
+	if new_direction.x < 0:
+		attack_sprite.flip_h = true
+	if new_direction.x > 0:
+		attack_sprite.flip_h = false

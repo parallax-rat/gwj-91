@@ -33,7 +33,7 @@ func get_random_direction_2d() -> Vector2:
 
 
 func _process(delta: float) -> void:
-	sprite.rotate(0.1)
+	sprite.rotate(0.05)
 
 
 func _physics_process(delta: float) -> void:
@@ -56,5 +56,5 @@ func _physics_process(delta: float) -> void:
 
 
 func collect_dna() -> void:
-	player.dna.increase(1)
+	player.collect_dna(1)
 	queue_free()

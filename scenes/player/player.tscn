@@ -70,4 +70,6 @@ debug_color = Color(1, 0.31729144, 0.90568215, 0.16470589)
 [node name="CollectSFX" type="AudioStreamPlayer2D" parent="." unique_id=622275291]
 stream = SubResource("AudioStreamRandomizer_fcs02")
 
+[connection signal="direction_changed" from="MovementComponent" to="." method="_on_movement_component_direction_changed"]
+[connection signal="direction_changed" from="MovementComponent" to="AttackComponent" method="_on_movement_component_direction_changed"]
 [connection signal="body_entered" from="DNASiphon" to="." method="_on_dna_siphon_body_entered"]
