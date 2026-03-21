@@ -43,6 +43,8 @@ tick_time_label=""
 debug_ui=""
 spawn_component=""
 enemy=""
+dna_spawn_location=""
+dna_node_parent=""
 
 [gui]
 

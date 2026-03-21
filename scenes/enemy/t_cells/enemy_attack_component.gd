@@ -7,7 +7,6 @@ extends Node2D
 @export_category("Need Node Assignment")
 @export var enemy_node: TCellEnemy
 @export var sprite_2d: Sprite2D
-@export var range: Area2D
 @export_category("Self Assigned Nodes")
 @export var cooldown_timer: Timer
 @export var attack_sfx: AudioStreamPlayer2D
@@ -16,7 +15,6 @@ extends Node2D
 func _ready() -> void:
 	if !enemy_node and not get_parent() == null:
 		enemy_node = get_parent()
-	range.body_entered.connect(_on_player_in_attack_range)
 
 
 func _on_player_in_attack_range(player: Node2D) -> void:
@@ -24,4 +22,4 @@ func _on_player_in_attack_range(player: Node2D) -> void:
 		cooldown_timer.start(cooldown_value)
 		player.take_damage(damage)
 		attack_sfx.play()
-		TweenFX.stretch(sprite_2d)
+		TweenFX.stretch(sprite_2d,0.2,0.3)

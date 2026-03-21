@@ -2,7 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bmv8ad07efyyh" path="res://scenes/dna/dna.gd" id="1_om8ne"]
 [ext_resource type="Shader" uid="uid://dr8jwnnc1up7e" path="res://shaders/shaderlib/dynamic_drop_shadow_canvasitem_no_colorrect_needed.gdshader" id="2_g8yjs"]
+[ext_resource type="Texture2D" uid="uid://c10shqv51qu71" path="res://scenes/dna/no_shadows/DNAFrag1.png" id="2_vhmhg"]
 [ext_resource type="Texture2D" uid="uid://dcv2lchqdp883" path="res://scenes/dna/DNAFragment_A.png" id="3_3dg61"]
+[ext_resource type="Texture2D" uid="uid://brfemudooij06" path="res://scenes/dna/no_shadows/DNAFrag2.png" id="3_5c381"]
+[ext_resource type="Texture2D" uid="uid://ya4gvp0fmx56" path="res://scenes/dna/no_shadows/DNAFrag3.png" id="4_30l7v"]
+[ext_resource type="Texture2D" uid="uid://cmucjikq10cny" path="res://scenes/dna/no_shadows/DNAFrag4.png" id="5_aj2wh"]
+[ext_resource type="Texture2D" uid="uid://cyukfuxqpo3nu" path="res://scenes/dna/no_shadows/DNAFrag5.png" id="6_hubb5"]
+[ext_resource type="Texture2D" uid="uid://mffi4bviw35o" path="res://scenes/dna/no_shadows/DNAFrag6.png" id="7_2w0wf"]
+[ext_resource type="Texture2D" uid="uid://uu0520xtrl3e" path="res://scenes/dna/no_shadows/DNAFrag7.png" id="8_uq8sb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hnfe7"]
 shader = ExtResource("2_g8yjs")
@@ -18,6 +25,7 @@ collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_om8ne")
+sprites = Array[Texture2D]([ExtResource("2_vhmhg"), ExtResource("3_5c381"), ExtResource("4_30l7v"), ExtResource("5_aj2wh"), ExtResource("6_hubb5"), ExtResource("7_2w0wf"), ExtResource("8_uq8sb")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2108022924]
 material = SubResource("ShaderMaterial_hnfe7")
@@ -28,12 +36,3 @@ region_rect = Rect2(36, 40, 46, 46)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=955650286]
 shape = SubResource("CircleShape2D_yt7vt")
-
-[node name="Label" type="Label" parent="." unique_id=1594954532]
-visible = false
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = -9.0
-text = "0.0"
-horizontal_alignment = 1

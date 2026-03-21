@@ -11,19 +11,15 @@ extends CharacterBody2D
 @export var max_speed: float = 1200
 @export var magnetic_strength: float = 500
 @export var collection_distance: float = 24.0
+@export var sprites: Array[Texture2D]
 
 var speed: float = base_speed
 var collecting: bool = false
 var collection_time_elapsed: float = 1.0
 
 func _ready() -> void:
-	TweenFX.orbit(sprite,1,1,0)
-	TweenFX.glow_pulse(sprite,1,.1,.5)
+	sprite.texture = sprites.pick_random()
 	## TODO Randomize sprite on spawn
-
-
-func random_spawn() -> void:
-	velocity = global_position.direction_to(get_random_direction_2d())
 
 
 func get_random_direction_2d() -> Vector2:
@@ -34,6 +30,10 @@ func get_random_direction_2d() -> Vector2:
 	# Rotate the base direction by the random angle
 	var random_direction := base_direction.rotated(random_angle)
 	return random_direction
+
+
+func _process(delta: float) -> void:
+	sprite.rotate(0.1)
 
 
 func _physics_process(delta: float) -> void:

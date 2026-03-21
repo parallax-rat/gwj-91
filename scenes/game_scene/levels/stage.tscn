@@ -93,7 +93,7 @@ shape = SubResource("RectangleShape2D_0e2qu")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1701545518]
 physics_interpolation_mode = 1
 top_level = true
-offset = Vector2(-1.1256127, -0.118609734)
+offset = Vector2(-0.44237268, 0.41520512)
 zoom = Vector2(1.3, 1.3)
 limit_left = -960
 limit_top = -960
@@ -117,3 +117,5 @@ follow_damping = true
 draw_limits = true
 limit_target = NodePath("../CameraLimitZone/CollisionShape2D")
 noise = SubResource("Resource_t70pv")
+
+[node name="DNA" type="Node2D" parent="." unique_id=982028405 groups=["dna_node_parent"]]

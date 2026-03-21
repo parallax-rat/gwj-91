@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dqus7ddco8loo" path="res://addons/indie_game_components/components/movement/EightDirMoverComponent.gd" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://cb27mxocmn07i" path="res://scenes/player/player.gd" id="1_lvxji"]
-[ext_resource type="StatPool" uid="uid://sqms50b2qn0a" path="res://scenes/player/health_stat_pool.tres" id="2_75vfm"]
-[ext_resource type="StatPool" uid="uid://b8v86lv7uuyj8" path="res://scenes/player/dna_stat_pool.tres" id="3_0owmy"]
 [ext_resource type="PackedScene" uid="uid://cb7pty3hi22o6" path="res://scenes/player/attacks/attack_component.tscn" id="6_qek5x"]
-[ext_resource type="Texture2D" uid="uid://bsh5v3obra4wi" path="res://scenes/enemy/virus/Virus1.png" id="7_0owmy"]
+[ext_resource type="Texture2D" uid="uid://d35carnhg85lr" path="res://scenes/enemy/virus/Virus1.png" id="7_0owmy"]
 [ext_resource type="Shader" uid="uid://dr8jwnnc1up7e" path="res://shaders/shaderlib/dynamic_drop_shadow_canvasitem_no_colorrect_needed.gdshader" id="7_fm80t"]
 [ext_resource type="AudioStream" uid="uid://dvvnywgpulbe6" path="res://scenes/dna/collect.wav" id="8_je7p5"]
 [ext_resource type="AudioStream" uid="uid://ctondsev7f5fb" path="res://scenes/dna/collect2.wav" id="9_fm80t"]
@@ -22,7 +20,7 @@ shader_parameter/angle = 249.27201184042
 radius = 37.215588
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lvxji"]
-radius = 70.178345
+radius = 64.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fcs02"]
 streams_count = 4
@@ -35,8 +33,6 @@ stream_3/stream = ExtResource("11_ugbui")
 collision_mask = 8
 motion_mode = 1
 script = ExtResource("1_lvxji")
-health = ExtResource("2_75vfm")
-dna = ExtResource("3_0owmy")
 
 [node name="MovementComponent" type="Node" parent="." unique_id=2100401521]
 script = ExtResource("1_dovo2")
@@ -54,7 +50,6 @@ texture = ExtResource("7_0owmy")
 region_rect = Rect2(0, 0, 161, 150)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=287641513]
-position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_gmlin")
 debug_color = Color(0, 0.8328853, 0, 0.41960785)
 

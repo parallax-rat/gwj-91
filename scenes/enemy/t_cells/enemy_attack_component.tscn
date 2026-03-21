@@ -13,7 +13,10 @@ stream_1/stream = ExtResource("3_dyykt")
 stream_2/stream = ExtResource("4_wafbh")
 stream_3/stream = ExtResource("5_7pg4k")
 
-[node name="EnemyAttackComponent" type="Node2D" unique_id=340662538 node_paths=PackedStringArray("cooldown_timer", "attack_sfx")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_tav0i"]
+radius = 38.0
+
+[node name="EnemyAttackComponent" type="Area2D" unique_id=557437677 node_paths=PackedStringArray("cooldown_timer", "attack_sfx")]
 script = ExtResource("1_v721a")
 cooldown_timer = NodePath("Cooldown")
 attack_sfx = NodePath("AttackSFX")
@@ -25,3 +28,8 @@ one_shot = true
 
 [node name="AttackSFX" type="AudioStreamPlayer2D" parent="." unique_id=2048837146]
 stream = SubResource("AudioStreamRandomizer_1tt4h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1117996103]
+shape = SubResource("CircleShape2D_tav0i")
+
+[connection signal="body_entered" from="." to="." method="_on_player_in_attack_range"]

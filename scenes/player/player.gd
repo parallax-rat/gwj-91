@@ -5,13 +5,25 @@ extends CharacterBody2D
 @onready var collect_sfx: AudioStreamPlayer2D = $CollectSFX
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-@export var current_level: int = 1
-@export var health: StatPool
-@export var dna: StatPool
+
+@export var starting_health: int = 50
 @export var base_dna_to_level:int = 8
 @export var dna_to_level_growth_rate: float = 1.12
 
 @export var evolutions: Array[Evolution]
+
+var current_level: int = 1
+var health: StatPool = StatPool.new()
+var dna: StatPool = StatPool.new()
+
+
+func _ready() -> void:
+	health.max_value = starting_health
+	CLog.o("Health: ",health.value)
+	health.fill()
+	CLog.o("Health(filled): ",health.value)
+	dna.max_value = base_dna_to_level
+	dna.deplete()
 
 
 func _on_dna_siphon_body_entered(body: Node2D) -> void:
