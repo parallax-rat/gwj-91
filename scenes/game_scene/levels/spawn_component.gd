@@ -38,7 +38,6 @@ func get_random_direction_2d() -> Vector2:
 	return random_direction
 
 
-
 func _on_tick_updated(current_tick:int) -> void:
 	if current_tick >= enemy_spawn_frequency:
 		spawn_enemy(enemy_to_spawn)
