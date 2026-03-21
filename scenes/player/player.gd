@@ -41,7 +41,7 @@ func level_up() -> void:
 
 func increase_dna(amount:int) -> void:
 	dna.increase(amount)
-	collect_sfx.play()
+	
 	if dna.is_filled():
 		level_up()
 
